@@ -20,8 +20,8 @@ public class VendView {
     }
 
     public void printItems(List<ItemDto> items) {
-        items.stream()
-                .forEach(x -> io.print(x.getName() + ", $" + x.getCost() + ", " + x.getStock() + " remaining."));
+        io.print("******Current Inventory******");
+        items.forEach(x -> io.print(x.getName() + ", $" + x.getCost() + ", " + x.getStock() + " remaining."));
     }
 
     public int printMenuAndGetSelection() {
@@ -36,6 +36,15 @@ public class VendView {
 
     public BigDecimal promptMoneyInserted() {
         return new BigDecimal(io.readString("How much money would you like to insert? (Please enter a value)"));
+    }
+
+    public int printItemsAndGetSelection(List<ItemDto> items) {
+        io.print("");
+        io.print("================================");
+        io.print("Which item would you like to buy?");
+        items.forEach(x -> io.print(x.getId() + ". " + x.getName()));
+        io.print("6. Exit");
+        return io.readInt("Please select from the above choices.", 1, 6);
     }
 
     public void printUnknown() {

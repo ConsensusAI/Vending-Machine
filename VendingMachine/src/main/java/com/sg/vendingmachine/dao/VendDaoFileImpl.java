@@ -3,7 +3,6 @@ package com.sg.vendingmachine.dao;
 import com.sg.vendingmachine.dto.ItemDto;
 import com.sg.vendingmachine.dto.ItemInventory;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class VendDaoFileImpl implements VendDao {

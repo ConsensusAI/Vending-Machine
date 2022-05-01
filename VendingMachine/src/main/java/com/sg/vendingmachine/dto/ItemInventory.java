@@ -18,11 +18,11 @@ public class ItemInventory {
     private List<ItemDto> allItems;
 
     public ItemInventory() {
-        this.CHOCOLATE_BAR = new ItemDto("Chocolate Bar", CHOCOLATE_PRICE, 12);
-        this.SPORTS_DRINK = new ItemDto("Sports Drink", SPORTS_PRICE, 4);
-        this.WATER_BOTTLE = new ItemDto("Water Bottle", WATER_PRICE, 5);
-        this.GRANOLA_BAR = new ItemDto("Granola Bar", GRANOLA_PRICE, 8);
-        this.CHIPS = new ItemDto("Potato Chips", CHIPS_PRICE, 6);
+        this.CHOCOLATE_BAR = new ItemDto("1","Chocolate Bar", CHOCOLATE_PRICE, 12);
+        this.SPORTS_DRINK = new ItemDto("2","Sports Drink", SPORTS_PRICE, 4);
+        this.WATER_BOTTLE = new ItemDto("3","Water Bottle", WATER_PRICE, 5);
+        this.GRANOLA_BAR = new ItemDto("4","Granola Bar", GRANOLA_PRICE, 8);
+        this.CHIPS = new ItemDto("5","Potato Chips", CHIPS_PRICE, 6);
         this.allItems = new ArrayList<>();
         allItems.add(CHOCOLATE_BAR);
         allItems.add(SPORTS_DRINK);
