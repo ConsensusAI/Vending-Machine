@@ -2,6 +2,7 @@ package com.sg.vendingmachine.ui;
 
 import com.sg.vendingmachine.dto.ItemDto;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 public class VendView {
@@ -12,9 +13,37 @@ public class VendView {
         this.io = io;
     }
 
+    public void printWelcomeBanner() {
+        io.print("*******************************************");
+        io.print("Welcome to the Smart Vending MachineTM Plus");
+        io.print("");
+    }
+
     public void printItems(List<ItemDto> items) {
         items.stream()
                 .forEach(x -> io.print(x.getName() + ", $" + x.getCost() + ", " + x.getStock() + " remaining."));
+    }
+
+    public int printMenuAndGetSelection() {
+        io.print("Main Menu");
+        io.print("What would you like to do?");
+        io.print("");
+        io.print("1. Purchase an item.");
+        io.print("2. Exit");
+
+        return io.readInt("Please select from the above choices.", 1, 2);
+    }
+
+    public BigDecimal promptMoneyInserted() {
+        return new BigDecimal(io.readString("How much money would you like to insert? (Please enter a value)"));
+    }
+
+    public void printUnknown() {
+        io.print("Unknown Command!!");
+    }
+
+    public void printExitMessage() {
+        io.print("Goodbye!!");
     }
 
 }
