@@ -1,6 +1,6 @@
 package com.sg.vendingmachine.service;
 
-import com.sg.vendingmachine.dao.VendDao;
+import com.sg.vendingmachine.dao.VendInventoryDao;
 import com.sg.vendingmachine.dao.VendPersistenceException;
 import com.sg.vendingmachine.dto.ItemDto;
 
@@ -8,18 +8,18 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VendDaoStubImpl implements VendDao {
+public class VendInventoryDaoStubImpl implements VendInventoryDao {
 
     public ItemDto onlyItem;
 
-    public VendDaoStubImpl() {
+    public VendInventoryDaoStubImpl() {
         onlyItem = new ItemDto("1");
         onlyItem.setName("Chips");
         onlyItem.setCost(new BigDecimal("9.99"));
         onlyItem.setStock(10);
     }
 
-    public VendDaoStubImpl(ItemDto testItem) {
+    public VendInventoryDaoStubImpl(ItemDto testItem) {
         this.onlyItem = testItem;
     }
 

@@ -2,10 +2,7 @@ package com.sg.vendingmachine.controller;
 
 import com.sg.vendingmachine.dao.VendPersistenceException;
 import com.sg.vendingmachine.dto.ItemDto;
-import com.sg.vendingmachine.service.TransactionService;
-import com.sg.vendingmachine.service.VendInsufficientFundsException;
-import com.sg.vendingmachine.service.VendNoItemInventoryException;
-import com.sg.vendingmachine.service.VendServiceLayer;
+import com.sg.vendingmachine.service.*;
 import com.sg.vendingmachine.ui.VendView;
 
 import java.math.BigDecimal;
@@ -15,12 +12,12 @@ import java.util.List;
 public class VendController {
 
     private final VendView view;
-    private final VendServiceLayer service;
+    private final InventoryService inventoryService;
     private TransactionService transactionService;
 
-    public VendController(VendServiceLayer service, VendView view, TransactionService transactionService) {
+    public VendController(InventoryService inventoryService, VendView view, TransactionService transactionService) {
         this.view = view;
-        this.service = service;
+        this.inventoryService = inventoryService;
         this.transactionService = transactionService;
     }
 
@@ -31,7 +28,7 @@ public class VendController {
         try {
             while (keepGoing) {
                 view.printWelcomeBanner();
-                view.printItems(service.getAllItems());
+                view.printItems(inventoryService.getAllItems());
                 menuSelection = view.printMenuAndGetSelection();
 
                 switch (menuSelection) {
@@ -48,23 +45,20 @@ public class VendController {
 
             exitMessage();
         } catch (VendPersistenceException |
-                VendNoItemInventoryException |
-                VendInsufficientFundsException e) {
+                NoStockException |
+                InsufficientFundsException e) {
             view.printErrorMessage(e.getMessage());
         }
-
     }
 
-    private void purchaseItem() throws VendPersistenceException,
-            VendNoItemInventoryException,
-            VendInsufficientFundsException {
+    private void purchaseItem() throws VendPersistenceException, NoStockException, InsufficientFundsException {
         BigDecimal moneyInserted = view.promptMoneyInserted().setScale(2, RoundingMode.HALF_UP);
         int itemSelection;
         boolean itemPurchased = false;
         List<ItemDto> allItems;
 
         while (true) {
-            allItems = service.getAllItems();
+            allItems = inventoryService.getAllItems();
             view.printItems(allItems);
             view.printMoney(moneyInserted);
             itemSelection = view.printItemsAndGetSelection(allItems);
@@ -82,7 +76,7 @@ public class VendController {
         }
     }
 
-    private BigDecimal subtractMoney(BigDecimal moneyInserted, String itemId) throws VendPersistenceException, VendNoItemInventoryException, VendInsufficientFundsException {
+    private BigDecimal subtractMoney(BigDecimal moneyInserted, String itemId) throws VendPersistenceException, NoStockException, InsufficientFundsException {
         return transactionService.subtractMoney(moneyInserted, itemId);
     }
 

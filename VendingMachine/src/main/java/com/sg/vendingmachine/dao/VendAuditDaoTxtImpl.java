@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
-public class VendAuditDaoFileImpl implements VendAuditDao {
+public class VendAuditDaoTxtImpl implements VendAuditDao {
 
     private static final String AUDIT_FILE = "audit.txt";
 
