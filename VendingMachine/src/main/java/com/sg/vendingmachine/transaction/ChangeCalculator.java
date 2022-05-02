@@ -3,7 +3,7 @@ package com.sg.vendingmachine.transaction;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 
-public class ChangeService {
+public class ChangeCalculator {
 
     private static final String QUARTER_VALUE = Coins.QUARTER.getValue();
     private static final String DIME_VALUE = Coins.DIME.getValue();

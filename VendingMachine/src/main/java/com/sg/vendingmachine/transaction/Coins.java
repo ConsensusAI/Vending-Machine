@@ -1,6 +1,6 @@
 package com.sg.vendingmachine.transaction;
 
-// After the changes I made, this enum is kind of unnecessary, you can just declare these values as constants in the ChangeService if you want
+// After the changes I made, this enum is kind of unnecessary, you can just declare these values as constants in the ChangeCalculator if you want
 enum Coins {
     PENNY("1"),
     NICKEL("5"),
