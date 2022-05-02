@@ -4,7 +4,7 @@ import java.math.BigDecimal;
 import java.util.Objects;
 
 public class ItemDto {
-    private String id;
+    private final String id;
     private String name;
     private BigDecimal cost;
     private int stock;

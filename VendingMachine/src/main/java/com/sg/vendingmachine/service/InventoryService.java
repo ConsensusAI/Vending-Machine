@@ -7,13 +7,13 @@ import com.sg.vendingmachine.dto.ItemDto;
 import java.util.List;
 
 public class InventoryService {
-    VendInventoryDao dao;
+    private final VendInventoryDao inventoryDao;
 
-    public InventoryService(VendInventoryDao dao) {
-        this.dao = dao;
+    public InventoryService(VendInventoryDao inventoryDao) {
+        this.inventoryDao = inventoryDao;
     }
 
     public List<ItemDto> getAllItems() throws VendPersistenceException {
-        return dao.getAllItems();
+        return inventoryDao.getAllItems();
     }
 }

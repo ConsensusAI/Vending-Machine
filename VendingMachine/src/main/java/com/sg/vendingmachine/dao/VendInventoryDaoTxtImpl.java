@@ -9,15 +9,15 @@ import java.util.*;
 public class VendInventoryDaoTxtImpl implements VendInventoryDao {
 
     private Map<String, ItemDto> inventory = new HashMap<>();
-    private final String INVENTORY_FILE;
+    private final String inventoryFile;
     private static final String DELIMITER = "::";
 
     public VendInventoryDaoTxtImpl() {
-        INVENTORY_FILE = "inventory.txt";
+        inventoryFile = "inventory.txt";
     }
 
     public VendInventoryDaoTxtImpl(String inventoryTextFile) {
-        this.INVENTORY_FILE = inventoryTextFile;
+        this.inventoryFile = inventoryTextFile;
     }
 
     public ItemDto addItem(String id, ItemDto item) throws VendPersistenceException {
@@ -56,7 +56,7 @@ public class VendInventoryDaoTxtImpl implements VendInventoryDao {
         try {
             scanner = new Scanner(
                     new BufferedReader(
-                            new FileReader(INVENTORY_FILE)));
+                            new FileReader(inventoryFile)));
         } catch (FileNotFoundException e) {
             throw new VendPersistenceException("Could not load inventory data into memory", e);
         }
@@ -85,7 +85,7 @@ public class VendInventoryDaoTxtImpl implements VendInventoryDao {
         PrintWriter out;
 
         try {
-            out = new PrintWriter(new FileWriter(INVENTORY_FILE));
+            out = new PrintWriter(new FileWriter(inventoryFile));
         } catch (IOException e) {
             throw new VendPersistenceException("Could not save inventory data.");
         }

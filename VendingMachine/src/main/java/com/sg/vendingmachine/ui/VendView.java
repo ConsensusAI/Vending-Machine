@@ -4,11 +4,10 @@ import com.sg.vendingmachine.dto.ItemDto;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 public class VendView {
 
-    private UserIO io;
+    private final UserIO io;
 
     public VendView(UserIO io) {
         this.io = io;
