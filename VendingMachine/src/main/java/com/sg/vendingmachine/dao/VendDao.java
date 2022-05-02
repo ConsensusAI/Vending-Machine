@@ -9,7 +9,7 @@ public interface VendDao {
 
     List<ItemDto> getAllItems() throws VendPersistenceException;
 
-    ItemDto getItem(String Id) throws VendPersistenceException;
+    ItemDto getItem(String id) throws VendPersistenceException;
 
     int getItemStock(String id) throws VendPersistenceException;
 
