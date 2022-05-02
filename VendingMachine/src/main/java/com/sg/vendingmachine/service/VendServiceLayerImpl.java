@@ -21,18 +21,26 @@ public class VendServiceLayerImpl implements VendServiceLayer {
     }
 
     @Override
-    public boolean checkStock(String itemId) throws VendPersistenceException {
-        return false;
+    public void checkStock(String itemId) throws VendPersistenceException, VendNoItemInventoryException {
+        if (dao.getItem(itemId).getStock() < 0) {
+            throw new VendNoItemInventoryException("ERROR: Item is out of stock.");
+        }
     }
 
     @Override
-    public boolean compareMoney(BigDecimal userMoney, String itemId) throws VendPersistenceException {
-        return userMoney.compareTo(dao.getItemCost(itemId)) >= 0;
+    public void compareMoney(BigDecimal userMoney, String itemId) throws VendPersistenceException, VendInsufficientFundsException {
+        if (userMoney.compareTo(dao.getItemCost(itemId)) >= 0) {
+            throw new VendInsufficientFundsException("ERROR: Insufficient funds.");
+        }
     }
 
     @Override
-    public BigDecimal subtractMoney(BigDecimal moneyInserted, String itemId) throws VendPersistenceException {
+    public BigDecimal subtractMoney(BigDecimal moneyInserted, String itemId) throws VendPersistenceException,
+            VendNoItemInventoryException,
+            VendInsufficientFundsException{
+        compareMoney(moneyInserted, itemId);
         moneyInserted = dao.subtractMoney(moneyInserted, itemId);
+        checkStock(itemId);
         dao.reduceItemStock(itemId);
         return moneyInserted;
     }
