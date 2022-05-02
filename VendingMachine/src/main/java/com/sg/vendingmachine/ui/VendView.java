@@ -20,11 +20,13 @@ public class VendView {
         io.print("");
     }
 
-    public void printItems(Map<String, ItemDto> items) {
+    public void printItems(List<ItemDto> items) {
         io.print("******Current Inventory******");
-        items.entrySet()
-                .forEach(x -> io.print(x.getValue().getName() + ", $" + x.getValue().getCost() +
-                        ", " + x.getValue().getStock() + " remaining."));
+        items.stream()
+                .filter(x -> x.getStock() > 0)
+                .forEach(x -> io.print(x.getName() + ", $" + x.getCost() +
+                        ", " + x.getStock() + " remaining."));
+        io.print("");
     }
 
     public int printMenuAndGetSelection() {
@@ -41,19 +43,21 @@ public class VendView {
         return new BigDecimal(io.readString("How much money would you like to insert? (Please enter a value)"));
     }
 
-    public int printItemsAndGetSelection(Map<String, ItemDto> items) {
+    public int printItemsAndGetSelection(List<ItemDto> items) {
         io.print("");
         io.print("================================");
         io.print("Which item would you like to buy?");
         int max = items.size() + 1;
-        items.entrySet()
-                .forEach(x -> io.print(x.getKey() + ". " + x.getValue().getName()));
+        items.stream()
+                .filter(x -> x.getStock() > 0)
+                .forEach(x -> io.print(x.getId() + ". " + x.getName()));
         io.print(max + ". Exit");
         return io.readInt("Please select from the above choices.", 1, max);
     }
 
     public void printMoney(BigDecimal money) {
-        io.print("You have $" + money + ".");
+        io.print("YOU HAVE: $" + money + ".");
+        io.print("");
     }
 
     public void printCannotAfford() {
@@ -62,8 +66,18 @@ public class VendView {
         io.print("");
     }
 
+    public void printOutOfStock() {
+        io.print("Sorry, that item is out of stock.");
+        io.print("");
+    }
+
     public void printUnknown() {
         io.print("Unknown Command!!");
+    }
+
+    public void printErrorMessage(String errorMsg) {
+        io.print("=== ERROR ===");
+        io.print(errorMsg);
     }
 
     public void printExitMessage() {

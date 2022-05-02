@@ -1,83 +1,97 @@
 package com.sg.vendingmachine.controller;
 
 import com.sg.vendingmachine.dao.VendDao;
+import com.sg.vendingmachine.dao.VendPersistenceException;
 import com.sg.vendingmachine.dto.ItemDto;
 import com.sg.vendingmachine.ui.VendView;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 public class VendController {
 
     private VendView view;
     private VendDao dao;
-    private Map<String, ItemDto> allItems;
 
     public VendController(VendView view, VendDao dao) {
         this.view = view;
         this.dao = dao;
-        allItems = dao.getAllItems();
     }
 
     public void run() {
         boolean keepGoing = true;
         int menuSelection;
 
-        while (keepGoing) {
-            view.printWelcomeBanner();
-            view.printItems(allItems);
-            menuSelection = view.printMenuAndGetSelection();
+        try {
+            while (keepGoing) {
+                view.printWelcomeBanner();
+                view.printItems(dao.getAllItems());
+                menuSelection = view.printMenuAndGetSelection();
 
-            switch (menuSelection) {
-                case 1:
-                    purchaseItem();
-                    break;
-                case 2:
-                    keepGoing = false;
-                    break;
-                default:
-                    unknown();
+                switch (menuSelection) {
+                    case 1:
+                        purchaseItem();
+                        break;
+                    case 2:
+                        keepGoing = false;
+                        break;
+                    default:
+                        unknown();
+                }
             }
+
+            exitMessage();
+        } catch (VendPersistenceException e) {
+            view.printErrorMessage(e.getMessage());
         }
 
-        exit();
     }
 
-    private void purchaseItem() {
+    private void purchaseItem() throws VendPersistenceException{
         BigDecimal moneyInserted = view.promptMoneyInserted().setScale(2);
-        view.printMoney(moneyInserted);
-        view.printItems(allItems);
         int itemSelection;
         boolean keepGoing = true;
+        List<ItemDto> allItems = dao.getAllItems();
 
         while (keepGoing) {
+            view.printItems(allItems);
+            view.printMoney(moneyInserted);
             itemSelection = view.printItemsAndGetSelection(allItems);
             if (itemSelection == allItems.size() + 1) {
                 keepGoing = false;
                 break;
             }
 
-            boolean canAfford = compareMoney(moneyInserted, String.valueOf(itemSelection));
-            if (canAfford) {
-                moneyInserted = dao.subtractMoney(moneyInserted, String.valueOf(itemSelection));
-                view.printMoney(moneyInserted);
+            String itemId = String.valueOf(itemSelection);
+            boolean hasStock = checkStock(itemId);
+            if (!hasStock) {
+                view.printOutOfStock();
             } else {
-                view.printCannotAfford();
+                boolean canAfford = compareMoney(moneyInserted, String.valueOf(itemSelection));
+                if (canAfford) {
+                    moneyInserted = dao.subtractMoney(moneyInserted, itemId);
+                    view.printMoney(moneyInserted);
+                    dao.reduceItemStock(itemId);
+                } else {
+                    view.printCannotAfford();
+                }
             }
         }
     }
 
-    private boolean compareMoney(BigDecimal userMoney, String itemId) {
-        System.out.println(dao.getItemCost(itemId));
+    private boolean compareMoney(BigDecimal userMoney, String itemId) throws VendPersistenceException {
         return userMoney.compareTo(dao.getItemCost(itemId)) >= 0;
+    }
+
+    private boolean checkStock(String itemId) throws VendPersistenceException {
+        return dao.getItemStock(itemId) > 0;
     }
 
     private void unknown() {
         view.printUnknown();
     }
 
-    private void exit() {
+    private void exitMessage() {
         view.printExitMessage();
     }
 }
