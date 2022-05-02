@@ -56,6 +56,12 @@ public class VendView {
         io.print("You have $" + money + ".");
     }
 
+    public void printCannotAfford() {
+        io.print("You do not have enough funds to purchase that item.");
+        io.print("Please insert more money or cancel.");
+        io.print("");
+    }
+
     public void printUnknown() {
         io.print("Unknown Command!!");
     }

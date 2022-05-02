@@ -45,7 +45,7 @@ public class VendController {
     }
 
     private void purchaseItem() {
-        BigDecimal moneyInserted = view.promptMoneyInserted();
+        BigDecimal moneyInserted = view.promptMoneyInserted().setScale(2);
         view.printMoney(moneyInserted);
         view.printItems(allItems);
         int itemSelection;
@@ -57,9 +57,20 @@ public class VendController {
                 keepGoing = false;
                 break;
             }
-            moneyInserted = dao.subtractMoney(moneyInserted, String.valueOf(itemSelection));
-            view.printMoney(moneyInserted);
+
+            boolean canAfford = compareMoney(moneyInserted, String.valueOf(itemSelection));
+            if (canAfford) {
+                moneyInserted = dao.subtractMoney(moneyInserted, String.valueOf(itemSelection));
+                view.printMoney(moneyInserted);
+            } else {
+                view.printCannotAfford();
+            }
         }
+    }
+
+    private boolean compareMoney(BigDecimal userMoney, String itemId) {
+        System.out.println(dao.getItemCost(itemId));
+        return userMoney.compareTo(dao.getItemCost(itemId)) >= 0;
     }
 
     private void unknown() {

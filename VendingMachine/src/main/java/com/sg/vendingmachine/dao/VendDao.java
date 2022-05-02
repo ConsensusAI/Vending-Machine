@@ -15,5 +15,7 @@ public interface VendDao {
 
     void reduceItemStock(String name);
 
+    BigDecimal getItemCost(String id);
+
     BigDecimal subtractMoney(BigDecimal initMoney, String itemId);
 }

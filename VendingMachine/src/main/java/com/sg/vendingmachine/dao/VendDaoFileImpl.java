@@ -37,6 +37,11 @@ public class VendDaoFileImpl implements VendDao {
     }
 
     @Override
+    public BigDecimal getItemCost(String id) {
+        return items.get(id).getCost();
+    }
+
+    @Override
     public BigDecimal subtractMoney(BigDecimal initMoney, String itemId) {
         BigDecimal cost = getItem(itemId).getCost();
         return initMoney.subtract(cost);
