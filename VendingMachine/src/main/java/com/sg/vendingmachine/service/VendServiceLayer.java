@@ -10,13 +10,13 @@ public interface VendServiceLayer {
 
     List<ItemDto> getAllItems() throws VendPersistenceException;
 
-    void checkStock(String itemId) throws VendPersistenceException, VendNoItemInventoryException;
+//    void checkStock(String itemId) throws VendPersistenceException, VendNoItemInventoryException;
+//
+//    void compareMoney(BigDecimal userMoney, String itemId) throws VendPersistenceException, VendInsufficientFundsException;
+//
+//    BigDecimal subtractMoney(BigDecimal moneyInserted, String itemId) throws VendPersistenceException,
+//            VendNoItemInventoryException,
+//            VendInsufficientFundsException;
 
-    void compareMoney(BigDecimal userMoney, String itemId) throws VendPersistenceException, VendInsufficientFundsException;
-
-    BigDecimal subtractMoney(BigDecimal moneyInserted, String itemId) throws VendPersistenceException,
-            VendNoItemInventoryException,
-            VendInsufficientFundsException;
-
-    String returnChange(BigDecimal amount);
+//    String returnChange(BigDecimal amount);
 }

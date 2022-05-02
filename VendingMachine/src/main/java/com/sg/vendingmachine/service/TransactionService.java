@@ -11,10 +11,10 @@ public class TransactionService {
     private VendAuditDao auditDao;
     private ChangeService changeService;
 
-    public TransactionService(VendDao dao, VendAuditDao auditDao, ChangeService changeService) {
+    public TransactionService(VendDao dao, VendAuditDao auditDao) {
         this.dao = dao;
         this.auditDao = auditDao;
-        this.changeService = changeService;
+        this.changeService = new ChangeService();
     }
 
     public void checkStock(String itemId) throws VendPersistenceException, VendNoItemInventoryException {

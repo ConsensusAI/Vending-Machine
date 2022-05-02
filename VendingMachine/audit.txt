@@ -29,3 +29,10 @@
 2022-05-02T09:16:47.799411 : 1 Chocolate Bar sold for 1.25. 28 remaining. Change returned: $4.15
 2022-05-02T09:16:48.895343 : 1 Sports Drink sold for 3.25. 27 remaining. Change returned: $0.90
 2022-05-02T09:17:15.453515 : 1 Potato Chips sold for 1.59. 29 remaining. Change returned: $3.89
+2022-05-02T10:27:30.985900 : 1 Chocolate Bar sold for 1.25. 27 remaining. Change returned: $3.75
+2022-05-02T10:27:32.213370 : 1 Water Bottle sold for 0.99. 28 remaining. Change returned: $2.76
+2022-05-02T10:30:26.764654 : 1 Chocolate Bar sold for 1.25. 26 remaining. Change returned: $48.75
+2022-05-02T10:30:27.473880 : 1 Sports Drink sold for 3.25. 26 remaining. Change returned: $45.50
+2022-05-02T10:30:28.005572 : 1 Water Bottle sold for 0.99. 27 remaining. Change returned: $44.51
+2022-05-02T10:30:28.515491 : 1 Granola Bar sold for 1.10. 28 remaining. Change returned: $43.41
+2022-05-02T10:30:29.008307 : 1 Potato Chips sold for 1.59. 28 remaining. Change returned: $41.82

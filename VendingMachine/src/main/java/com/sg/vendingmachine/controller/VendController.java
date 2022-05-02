@@ -2,6 +2,7 @@ package com.sg.vendingmachine.controller;
 
 import com.sg.vendingmachine.dao.VendPersistenceException;
 import com.sg.vendingmachine.dto.ItemDto;
+import com.sg.vendingmachine.service.TransactionService;
 import com.sg.vendingmachine.service.VendInsufficientFundsException;
 import com.sg.vendingmachine.service.VendNoItemInventoryException;
 import com.sg.vendingmachine.service.VendServiceLayer;
@@ -14,10 +15,12 @@ public class VendController {
 
     private final VendView view;
     private final VendServiceLayer service;
+    private TransactionService transactionService;
 
-    public VendController(VendServiceLayer service, VendView view) {
+    public VendController(VendServiceLayer service, VendView view, TransactionService transactionService) {
         this.view = view;
         this.service = service;
+        this.transactionService = transactionService;
     }
 
     public void run() {
@@ -74,12 +77,12 @@ public class VendController {
         }
 
         if (itemPurchased) {
-            view.printChange(service.returnChange(moneyInserted));
+            view.printChange(transactionService.getChange(moneyInserted));
         }
     }
 
     private BigDecimal subtractMoney(BigDecimal moneyInserted, String itemId) throws VendPersistenceException, VendNoItemInventoryException, VendInsufficientFundsException {
-        return service.subtractMoney(moneyInserted, itemId);
+        return transactionService.subtractMoney(moneyInserted, itemId);
     }
 
     private void unknown() {
