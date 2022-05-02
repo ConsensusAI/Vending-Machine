@@ -90,7 +90,18 @@ class VendDaoFileImplTest {
     }
 
     @Test
-    public void testGetItemCost() throws Exception {}
+    public void testGetItemCost() throws Exception {
+        ItemDto testItem = new ItemDto("1");
+        testItem.setName("Chips");
+        testItem.setCost(new BigDecimal("9.99"));
+        testItem.setStock(10);
+
+        testDao.addItem(testItem.getId(), testItem);
+        BigDecimal testCost = new BigDecimal("9.99");
+
+        assertEquals(testDao.getItemCost(testItem.getId()), testCost,
+                "The item cost should be 9.99");
+    }
 
     @Test
     public void testSubtractMoney() throws Exception {}
