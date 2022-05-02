@@ -30,14 +30,21 @@ class VendServiceLayerImplTest {
 
         BigDecimal testMoney = new BigDecimal("100.00");
         VendDao testDao = new VendDaoStubImpl(testItem);
+        VendAuditDao testAuditDao = new VendAuditDaoStubImpl();
+        VendServiceLayerImpl testService = new VendServiceLayerImpl(testDao, testAuditDao);
 
         try {
-            service.subtractMoney(testMoney, testItem.getId());
+            testService.subtractMoney(testMoney, testItem.getId());
             fail("Expected NoItemInventoryException was not thrown.");
         } catch (VendPersistenceException e) {
             fail("Incorrect exception was thrown.");
         } catch (VendNoItemInventoryException e) {
             return;
         }
+    }
+
+    @Test
+    public void testInsufficientFunds() throws Exception {
+        
     }
 }
