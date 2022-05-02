@@ -1,5 +1,5 @@
-1::Chocolate Bar::1.25::26
-2::Sports Drink::3.25::26
-3::Water Bottle::0.99::27
-4::Granola Bar::1.10::28
-5::Potato Chips::1.59::28
+1::Chocolate Bar::1.25::25
+2::Sports Drink::3.25::25
+3::Water Bottle::0.99::26
+4::Granola Bar::1.10::27
+5::Potato Chips::1.59::27

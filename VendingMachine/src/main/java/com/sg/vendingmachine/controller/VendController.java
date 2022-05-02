@@ -9,6 +9,7 @@ import com.sg.vendingmachine.service.VendServiceLayer;
 import com.sg.vendingmachine.ui.VendView;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 import java.util.List;
 
 public class VendController {
@@ -57,7 +58,7 @@ public class VendController {
     private void purchaseItem() throws VendPersistenceException,
             VendNoItemInventoryException,
             VendInsufficientFundsException {
-        BigDecimal moneyInserted = view.promptMoneyInserted().setScale(2);
+        BigDecimal moneyInserted = view.promptMoneyInserted().setScale(2, RoundingMode.HALF_UP);
         int itemSelection;
         boolean itemPurchased = false;
         List<ItemDto> allItems;

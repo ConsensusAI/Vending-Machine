@@ -19,7 +19,7 @@ public class App {
         VendView view = new VendView(io);
         VendDao dao = new VendDaoFileImpl();
         VendAuditDao auditDao = new VendAuditDaoFileImpl();
-        VendServiceLayer service = new VendServiceLayerImpl(dao, auditDao);
+        VendServiceLayer service = new VendServiceLayerImpl(dao);
         TransactionService transactionService = new TransactionService(dao, auditDao);
         VendController controller = new VendController(service, view, transactionService);
         controller.run();
