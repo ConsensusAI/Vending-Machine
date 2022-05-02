@@ -1,7 +1,6 @@
 package com.sg.vendingmachine.dao;
 
 import com.sg.vendingmachine.dto.ItemDto;
-import com.sg.vendingmachine.dto.ItemInventory;
 
 import java.io.*;
 import java.math.BigDecimal;
@@ -9,20 +8,15 @@ import java.util.*;
 
 public class VendDaoFileImpl implements VendDao {
 
-    private ItemInventory inventory;
     private Map<String, ItemDto> items = new HashMap<>();
     private final String INVENTORY_FILE;
     private static final String DELIMITER = "::";
 
-    public VendDaoFileImpl(ItemInventory inventory) {
-        this.inventory = inventory;
-//        this.items = inventory.getAllItems();
+    public VendDaoFileImpl() {
         INVENTORY_FILE = "inventory.txt";
     }
 
-    public VendDaoFileImpl(ItemInventory inventory, String inventoryTextFile) {
-        this.inventory = inventory;
-        this.items = inventory.getAllItems();
+    public VendDaoFileImpl(String inventoryTextFile) {
         this.INVENTORY_FILE = inventoryTextFile;
     }
 
