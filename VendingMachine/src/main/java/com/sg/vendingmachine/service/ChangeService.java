@@ -17,7 +17,7 @@ public class ChangeService {
         moneyReturned += returnQuarters(quarters);
         moneyReturned += returnDimes(dimes);
         moneyReturned += returnNickels(nickels);
-        moneyReturned += ;
+        moneyReturned += returnPennies(pennies);
 
         return moneyReturned;
     }
