@@ -1,5 +1,6 @@
 package com.sg.vendingmachine.service;
 
+import com.sg.vendingmachine.Change;
 import com.sg.vendingmachine.dao.VendAuditDao;
 import com.sg.vendingmachine.dao.VendDao;
 import com.sg.vendingmachine.dao.VendPersistenceException;
@@ -49,5 +50,25 @@ public class VendServiceLayerImpl implements VendServiceLayer {
                 + dao.getItemCost(itemId) + ". " + dao.getItemStock(itemId) +
                 " remaining. Change returned: $" + moneyInserted);
         return moneyInserted;
+    }
+
+    public String returnChange(BigDecimal amount) {
+        Change change = new Change(amount);
+        int quarters = change.returnQuarters();
+        int dimes = change.returnDimes();
+        int nickels = change.returnNickels();
+        int pennies = change.returnPennies();
+        String moneyReturned = "Your change: ";
+        if (quarters > 0) {
+            moneyReturned += "\n" + quarters + " Quarters";
+        }
+        if (dimes > 0) {
+            moneyReturned += "\n" + dimes + " Dimes";
+        }
+        if (nickels > 0) {
+            moneyReturned += "\n" + nickels + " Nickels";
+        }
+        moneyReturned += "\n" + pennies + " Pennies";
+        return moneyReturned;
     }
 }

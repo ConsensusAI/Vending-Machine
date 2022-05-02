@@ -14,23 +14,27 @@ public class Change {
         amountInPennies = amount.multiply(new BigDecimal("100"));
     }
 
-    public int returnQuarters(BigDecimal amountInPennies) {
+    public int returnQuarters() {
         BigDecimal quarters = amountInPennies.divide(new BigDecimal(QUARTER_VALUE),RoundingMode.HALF_DOWN);
         setAmountInPennies(amountInPennies.subtract(quarters));
         return quarters.intValue();
     }
 
-    public int returnDimes(BigDecimal amountInPennies) {
+    public int returnDimes() {
         BigDecimal dimes = amountInPennies.divide(new BigDecimal(DIME_VALUE),RoundingMode.HALF_DOWN);
         setAmountInPennies(amountInPennies.subtract(dimes));
         return dimes.intValue();
     }
 
 
-    public int returnNickels(BigDecimal amountInPennies) {
+    public int returnNickels() {
         BigDecimal nickels = amountInPennies.divide(new BigDecimal(NICKEL_VALUE),RoundingMode.HALF_DOWN);
         setAmountInPennies(amountInPennies.subtract(nickels));
         return nickels.intValue();
+    }
+
+    public int returnPennies() {
+        return this.amountInPennies.intValue();
     }
 
     public void setAmountInPennies(BigDecimal amountInPennies) {
