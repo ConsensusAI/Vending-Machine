@@ -46,33 +46,19 @@ public class VendController {
 
     private void purchaseItem() {
         BigDecimal moneyInserted = view.promptMoneyInserted();
+        view.printMoney(moneyInserted);
         view.printItems(allItems);
         int itemSelection;
         boolean keepGoing = true;
 
         while (keepGoing) {
             itemSelection = view.printItemsAndGetSelection(allItems);
-            switch (itemSelection) {
-                case 1:
-                    System.out.println("Chocolate bar purchased.");
-                    break;
-                case 2:
-                    System.out.println("Sports drink purchased.");
-                    break;
-                case 3:
-                    System.out.println("Water bottle purchased.");
-                    break;
-                case 4:
-                    System.out.println("Granola bar purchased.");
-                    break;
-                case 5:
-                    System.out.println("Potato chips purchased.");
-                    break;
-                case 6:
-                    keepGoing = false;
-                default:
-                    unknown();
+            if (itemSelection == allItems.size() + 1) {
+                keepGoing = false;
+                break;
             }
+            moneyInserted = dao.subtractMoney(moneyInserted, String.valueOf(itemSelection));
+            view.printMoney(moneyInserted);
         }
     }
 

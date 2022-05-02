@@ -27,12 +27,12 @@ public class VendDaoFileImpl implements VendDao {
     }
 
     @Override
-    public int getItemStock(String name) {
+    public int getItemStock(String id) {
         return 0;
     }
 
     @Override
-    public void reduceItemStock(String name) {
+    public void reduceItemStock(String id) {
 
     }
 

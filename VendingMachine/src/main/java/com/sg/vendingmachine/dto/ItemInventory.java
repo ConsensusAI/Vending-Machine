@@ -1,6 +1,7 @@
 package com.sg.vendingmachine.dto;
 
 import java.math.BigDecimal;
+import java.util.HashMap;
 import java.util.Map;
 
 public class ItemInventory {
@@ -22,6 +23,7 @@ public class ItemInventory {
         this.WATER_BOTTLE = new ItemDto("Water Bottle", WATER_PRICE, 5);
         this.GRANOLA_BAR = new ItemDto("Granola Bar", GRANOLA_PRICE, 8);
         this.CHIPS = new ItemDto("Potato Chips", CHIPS_PRICE, 6);
+        allItems = new HashMap<>();
         allItems.put("1", CHOCOLATE_BAR);
         allItems.put("2", SPORTS_DRINK);
         allItems.put("3", WATER_BOTTLE);

@@ -52,6 +52,10 @@ public class VendView {
         return io.readInt("Please select from the above choices.", 1, max);
     }
 
+    public void printMoney(BigDecimal money) {
+        io.print("You have $" + money + ".");
+    }
+
     public void printUnknown() {
         io.print("Unknown Command!!");
     }
