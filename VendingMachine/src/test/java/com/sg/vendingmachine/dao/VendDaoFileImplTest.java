@@ -104,6 +104,20 @@ class VendDaoFileImplTest {
     }
 
     @Test
-    public void testSubtractMoney() throws Exception {}
+    public void testSubtractMoney() throws Exception {
+        ItemDto testItem = new ItemDto("1");
+        testItem.setName("Chips");
+        testItem.setCost(new BigDecimal("9.99"));
+        testItem.setStock(10);
+
+        BigDecimal initialValue = new BigDecimal("10.50");
+        BigDecimal finalValue = new BigDecimal("0.51");
+
+        testDao.addItem(testItem.getId(), testItem);
+
+        BigDecimal testValue = testDao.subtractMoney(initialValue, "1");
+
+        assertEquals(testValue, finalValue, "The value returned after subtracting should be 0.51.");
+    }
 
 }
