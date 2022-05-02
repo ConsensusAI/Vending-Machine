@@ -11,9 +11,9 @@ public interface VendDao {
 
     ItemDto getItem(String Id) throws VendPersistenceException;
 
-    int getItemStock(String name) throws VendPersistenceException;
+    int getItemStock(String id) throws VendPersistenceException;
 
-    void reduceItemStock(String name) throws VendPersistenceException;
+    void reduceItemStock(String id) throws VendPersistenceException;
 
     BigDecimal getItemCost(String id) throws VendPersistenceException;
 

@@ -72,7 +72,22 @@ class VendDaoFileImplTest {
     }
 
     @Test
-    public void testGetReduceItemStock() throws Exception {}
+    public void testGetReduceItemStock() throws Exception {
+        ItemDto testItem = new ItemDto("1");
+        testItem.setName("Chips");
+        testItem.setCost(new BigDecimal("9.99"));
+        testItem.setStock(10);
+
+        testDao.addItem(testItem.getId(), testItem);
+
+        assertEquals(testDao.getItemStock(testItem.getId()), 10,
+                "The item should have a stock of 10.");
+
+        testDao.reduceItemStock(testItem.getId());
+
+        assertEquals(testDao.getItemStock(testItem.getId()), 9,
+                "The item stock should be reduced to 9.");
+    }
 
     @Test
     public void testGetItemCost() throws Exception {}
