@@ -6,10 +6,10 @@ import java.math.RoundingMode;
 public class Change {
 
     private BigDecimal amountInPennies;
-    private final String QUARTER_VALUE = Coins.QUARTER.toString();
-    private final String DIME_VALUE = Coins.DIME.toString();
-    private final String NICKEL_VALUE = Coins.NICKEL.toString();
-    private final String PENNY_VALUE = Coins.PENNY.toString();
+    private static final String QUARTER_VALUE = Coins.QUARTER.getValue();
+    private static final String DIME_VALUE = Coins.DIME.getValue();
+    private static final String NICKEL_VALUE = Coins.NICKEL.getValue();
+    private static final String PENNY_VALUE = Coins.PENNY.getValue();
 
     public Change(BigDecimal amount) {
         amountInPennies = amount.multiply(new BigDecimal("100"));
