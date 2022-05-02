@@ -1,5 +1,6 @@
 package com.sg.vendingmachine.service;
 
+import com.sg.vendingmachine.dao.VendAuditDao;
 import com.sg.vendingmachine.dao.VendDao;
 import com.sg.vendingmachine.dao.VendPersistenceException;
 import com.sg.vendingmachine.dto.ItemDto;
@@ -9,10 +10,11 @@ import java.util.List;
 
 public class VendServiceLayerImpl implements VendServiceLayer {
     VendDao dao;
-//    private VendAuditDao auditDao;
+    private VendAuditDao auditDao;
 
-    public VendServiceLayerImpl(VendDao dao) {
+    public VendServiceLayerImpl(VendDao dao, VendAuditDao auditDao) {
         this.dao = dao;
+        this.auditDao = auditDao;
     }
 
     @Override
@@ -42,6 +44,10 @@ public class VendServiceLayerImpl implements VendServiceLayer {
         checkStock(itemId);
         moneyInserted = dao.subtractMoney(moneyInserted, itemId);
         dao.reduceItemStock(itemId);
+
+        auditDao.writeAuditEntry("1 " + dao.getItem(itemId).getName() + " sold for "
+                + dao.getItemCost(itemId) + ". " + dao.getItemStock(itemId) +
+                " remaining. Change returned: $" + moneyInserted);
         return moneyInserted;
     }
 }

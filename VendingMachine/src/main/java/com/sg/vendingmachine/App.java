@@ -1,6 +1,8 @@
 package com.sg.vendingmachine;
 
 import com.sg.vendingmachine.controller.VendController;
+import com.sg.vendingmachine.dao.VendAuditDao;
+import com.sg.vendingmachine.dao.VendAuditDaoFileImpl;
 import com.sg.vendingmachine.dao.VendDao;
 import com.sg.vendingmachine.dao.VendDaoFileImpl;
 import com.sg.vendingmachine.service.VendServiceLayer;
@@ -15,7 +17,8 @@ public class App {
         UserIO io = new UserIOConsoleImpl();
         VendView view = new VendView(io);
         VendDao dao = new VendDaoFileImpl();
-        VendServiceLayer service = new VendServiceLayerImpl(dao);
+        VendAuditDao auditDao = new VendAuditDaoFileImpl();
+        VendServiceLayer service = new VendServiceLayerImpl(dao, auditDao);
         VendController controller = new VendController(service, view);
         controller.run();
     }

@@ -1,0 +1,2 @@
+2022-05-01T23:42:49.662556 : 1 Chocolate Bar sold for 1.25. 11 remaining. Change returned: $13.75
+2022-05-01T23:42:52.122200 : 1 Sports Drink sold for 3.25. 2 remaining. Change returned: $10.50

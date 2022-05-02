@@ -12,8 +12,8 @@ import java.util.List;
 
 public class VendController {
 
-    private VendView view;
-    private VendServiceLayer service;
+    private final VendView view;
+    private final VendServiceLayer service;
 
     public VendController(VendServiceLayer service, VendView view) {
         this.view = view;
