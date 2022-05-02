@@ -10,15 +10,15 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-class VendDaoFileImplTest {
+class VendInventoryDaoTxtImplTest {
 
-    VendDao testDao;
+    VendInventoryDao testDao;
 
     @BeforeEach
     public void setUp() throws Exception {
         String testFile = "testInventory.txt";
         new FileWriter(testFile);
-        testDao = new VendDaoFileImpl(testFile);
+        testDao = new VendInventoryDaoTxtImpl(testFile);
     }
 
     @Test

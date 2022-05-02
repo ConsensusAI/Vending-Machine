@@ -1,37 +1,37 @@
 package com.sg.vendingmachine.service;
 
 import com.sg.vendingmachine.dao.VendAuditDao;
-import com.sg.vendingmachine.dao.VendDao;
+import com.sg.vendingmachine.dao.VendInventoryDao;
 import com.sg.vendingmachine.dao.VendPersistenceException;
 
 import java.math.BigDecimal;
 
 public class TransactionService {
-    private VendDao dao;
+    private VendInventoryDao dao;
     private VendAuditDao auditDao;
     private ChangeService changeService;
 
-    public TransactionService(VendDao dao, VendAuditDao auditDao) {
+    public TransactionService(VendInventoryDao dao, VendAuditDao auditDao) {
         this.dao = dao;
         this.auditDao = auditDao;
         this.changeService = new ChangeService();
     }
 
-    public void checkStock(String itemId) throws VendPersistenceException, VendNoItemInventoryException {
+    public void checkStock(String itemId) throws VendPersistenceException, NoStockException {
         if (dao.getItem(itemId).getStock() <= 0) {
-            throw new VendNoItemInventoryException("ERROR: Item is out of stock.");
+            throw new NoStockException("ERROR: Item is out of stock.");
         }
     }
 
-    public void compareMoney(BigDecimal userMoney, String itemId) throws VendPersistenceException, VendInsufficientFundsException {
+    public void compareMoney(BigDecimal userMoney, String itemId) throws VendPersistenceException, InsufficientFundsException {
         if (userMoney.compareTo(dao.getItemCost(itemId)) < 0) {
-            throw new VendInsufficientFundsException("ERROR: Insufficient funds.");
+            throw new InsufficientFundsException("ERROR: Insufficient funds.");
         }
     }
 
     public BigDecimal subtractMoney(BigDecimal moneyInserted, String itemId) throws VendPersistenceException,
-            VendNoItemInventoryException,
-            VendInsufficientFundsException{
+            NoStockException,
+            InsufficientFundsException {
         compareMoney(moneyInserted, itemId);
         checkStock(itemId);
         moneyInserted = dao.subtractMoney(moneyInserted, itemId);

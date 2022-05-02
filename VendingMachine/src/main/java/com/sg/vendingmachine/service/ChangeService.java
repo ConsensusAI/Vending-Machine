@@ -61,5 +61,4 @@ public class ChangeService {
         }
         return penniesReturned;
     }
-
 }

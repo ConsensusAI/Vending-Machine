@@ -6,23 +6,23 @@ import java.io.*;
 import java.math.BigDecimal;
 import java.util.*;
 
-public class VendDaoFileImpl implements VendDao {
+public class VendInventoryDaoTxtImpl implements VendInventoryDao {
 
-    private Map<String, ItemDto> items = new HashMap<>();
+    private Map<String, ItemDto> inventory = new HashMap<>();
     private final String INVENTORY_FILE;
     private static final String DELIMITER = "::";
 
-    public VendDaoFileImpl() {
+    public VendInventoryDaoTxtImpl() {
         INVENTORY_FILE = "inventory.txt";
     }
 
-    public VendDaoFileImpl(String inventoryTextFile) {
+    public VendInventoryDaoTxtImpl(String inventoryTextFile) {
         this.INVENTORY_FILE = inventoryTextFile;
     }
 
     public ItemDto addItem(String id, ItemDto item) throws VendPersistenceException {
         loadInventory();
-        ItemDto newItem = items.put(id, item);
+        ItemDto newItem = inventory.put(id, item);
         writeInventory();
         return newItem;
     }
@@ -66,7 +66,7 @@ public class VendDaoFileImpl implements VendDao {
         while (scanner.hasNextLine()) {
             currentLine = scanner.nextLine();
             currentItem = unmarshallItem(currentLine);
-            items.put(currentItem.getId(), currentItem);
+            inventory.put(currentItem.getId(), currentItem);
         }
         scanner.close();
     }
@@ -103,37 +103,37 @@ public class VendDaoFileImpl implements VendDao {
     @Override
     public List<ItemDto> getAllItems() throws VendPersistenceException {
         loadInventory();
-        return new ArrayList<ItemDto>(items.values());
+        return new ArrayList<ItemDto>(inventory.values());
     }
 
     @Override
     public ItemDto getItem(String id) throws VendPersistenceException {
         loadInventory();
-        return items.get(id);
+        return inventory.get(id);
     }
 
     @Override
     public int getItemStock(String id) throws VendPersistenceException {
         loadInventory();
-        return items.get(id).getStock();
+        return inventory.get(id).getStock();
     }
 
     @Override
     public void reduceItemStock(String id) throws VendPersistenceException {
         loadInventory();
-        items.get(id).reduceStock();
+        inventory.get(id).reduceStock();
         writeInventory();
     }
 
     @Override
     public BigDecimal getItemCost(String id) throws VendPersistenceException {
         loadInventory();
-        return items.get(id).getCost();
+        return inventory.get(id).getCost();
     }
 
     @Override
     public BigDecimal subtractMoney(BigDecimal initMoney, String itemId) {
-        BigDecimal cost = items.get(itemId).getCost();
+        BigDecimal cost = inventory.get(itemId).getCost();
         return initMoney.subtract(cost);
     }
 }

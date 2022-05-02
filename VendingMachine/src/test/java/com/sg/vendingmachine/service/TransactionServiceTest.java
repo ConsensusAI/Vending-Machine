@@ -1,7 +1,7 @@
 package com.sg.vendingmachine.service;
 
 import com.sg.vendingmachine.dao.VendAuditDao;
-import com.sg.vendingmachine.dao.VendDao;
+import com.sg.vendingmachine.dao.VendInventoryDao;
 import com.sg.vendingmachine.dao.VendPersistenceException;
 import com.sg.vendingmachine.dto.ItemDto;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ public class TransactionServiceTest {
     private TransactionService transactionService;
 
     public TransactionServiceTest() {
-        VendDao dao = new VendDaoStubImpl();
+        VendInventoryDao dao = new VendInventoryDaoStubImpl();
         VendAuditDao auditDao = new VendAuditDaoStubImpl();
 
         transactionService = new TransactionService(dao, auditDao);
@@ -29,7 +29,7 @@ public class TransactionServiceTest {
         testItem.setStock(0);
 
         BigDecimal testMoney = new BigDecimal("100.00");
-        VendDao testDao = new VendDaoStubImpl(testItem);
+        VendInventoryDao testDao = new VendInventoryDaoStubImpl(testItem);
         VendAuditDao testAuditDao = new VendAuditDaoStubImpl();
         TransactionService testService = new TransactionService(testDao, testAuditDao);
 
@@ -37,9 +37,9 @@ public class TransactionServiceTest {
             testService.subtractMoney(testMoney, testItem.getId());
             fail("Expected NoItemInventoryException was not thrown.");
         } catch (VendPersistenceException
-                | VendInsufficientFundsException e) {
+                | InsufficientFundsException e) {
             fail("Incorrect exception was thrown.");
-        } catch (VendNoItemInventoryException e) {
+        } catch (NoStockException e) {
             return;
         }
     }
@@ -52,9 +52,9 @@ public class TransactionServiceTest {
             transactionService.subtractMoney(testMoney, "1");
             fail("Expected InsufficientfundsException was not thrown.");
         } catch (VendPersistenceException
-        | VendNoItemInventoryException e) {
+        | NoStockException e) {
             fail("Incorrect exception was thrown.");
-        } catch (VendInsufficientFundsException e) {
+        } catch (InsufficientFundsException e) {
             return;
         }
     }
