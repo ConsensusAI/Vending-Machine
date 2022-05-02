@@ -6,9 +6,13 @@ public enum Coins {
     DIME("10"),
     QUARTER("25");
 
-    public String value;
+    private final String value;
 
-    private Coins(String value) {this.value = value;}
+    Coins(String value) {this.value = value;}
+
+    public String getValue() {
+        return value;
+    }
 
     @Override
     public String toString() {
