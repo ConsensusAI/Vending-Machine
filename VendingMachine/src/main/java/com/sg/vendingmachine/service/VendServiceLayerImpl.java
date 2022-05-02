@@ -10,7 +10,7 @@ import java.util.List;
 
 public class VendServiceLayerImpl implements VendServiceLayer {
     VendDao dao;
-    private VendAuditDao auditDao;
+    private final VendAuditDao auditDao;
 
     public VendServiceLayerImpl(VendDao dao, VendAuditDao auditDao) {
         this.dao = dao;
