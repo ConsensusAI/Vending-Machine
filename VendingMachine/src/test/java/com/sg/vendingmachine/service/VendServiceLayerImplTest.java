@@ -36,7 +36,8 @@ class VendServiceLayerImplTest {
         try {
             testService.subtractMoney(testMoney, testItem.getId());
             fail("Expected NoItemInventoryException was not thrown.");
-        } catch (VendPersistenceException e) {
+        } catch (VendPersistenceException
+                | VendInsufficientFundsException e) {
             fail("Incorrect exception was thrown.");
         } catch (VendNoItemInventoryException e) {
             return;
@@ -45,6 +46,16 @@ class VendServiceLayerImplTest {
 
     @Test
     public void testInsufficientFunds() throws Exception {
-        
+        BigDecimal testMoney = new BigDecimal("0.01");
+
+        try {
+            service.subtractMoney(testMoney, "1");
+            fail("Expected InsufficientfundsException was not thrown.");
+        } catch (VendPersistenceException
+        | VendNoItemInventoryException e) {
+            fail("Incorrect exception was thrown.");
+        } catch (VendInsufficientFundsException e) {
+            return;
+        }
     }
 }
