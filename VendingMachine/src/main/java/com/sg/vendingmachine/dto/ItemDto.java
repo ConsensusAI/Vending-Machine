@@ -29,10 +29,6 @@ public class ItemDto {
         return stock;
     }
 
-    public void reduceStock() {
-        this.stock--;
-    }
-
     public void setName(String name) {
         this.name = name;
     }
