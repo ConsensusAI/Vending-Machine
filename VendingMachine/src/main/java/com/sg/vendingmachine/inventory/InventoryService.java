@@ -1,15 +1,11 @@
-package com.sg.vendingmachine.service;
-
-import com.sg.vendingmachine.dao.InventoryPersistenceException;
-import com.sg.vendingmachine.dao.VendInventoryDao;
-import com.sg.vendingmachine.dto.ItemDto;
+package com.sg.vendingmachine.inventory;
 
 import java.util.List;
 
 public class InventoryService {
-    private final VendInventoryDao inventoryDao;
+    private final InventoryDao inventoryDao;
 
-    public InventoryService(VendInventoryDao inventoryDao) {
+    public InventoryService(InventoryDao inventoryDao) {
         this.inventoryDao = inventoryDao;
     }
 

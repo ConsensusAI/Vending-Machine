@@ -1,7 +1,7 @@
-package com.sg.vendingmachine;
+package com.sg.vendingmachine.transaction;
 
 // After the changes I made, this enum is kind of unnecessary, you can just declare these values as constants in the ChangeService if you want
-public enum Coins {
+enum Coins {
     PENNY("1"),
     NICKEL("5"),
     DIME("10"),
@@ -13,7 +13,7 @@ public enum Coins {
         this.value = value;
     }
 
-    public String getValue() {
+    String getValue() {
         return value;
     }
 }

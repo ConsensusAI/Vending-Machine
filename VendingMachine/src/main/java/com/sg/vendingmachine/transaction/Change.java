@@ -1,4 +1,4 @@
-package com.sg.vendingmachine;
+package com.sg.vendingmachine.transaction;
 
 import java.math.BigDecimal;
 

@@ -1,4 +1,4 @@
-package com.sg.vendingmachine.ui;
+package com.sg.vendingmachine.system.ui;
 
 public interface UserIO {
 

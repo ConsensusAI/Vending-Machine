@@ -1,7 +1,4 @@
-package com.sg.vendingmachine.service;
-
-import com.sg.vendingmachine.Change;
-import com.sg.vendingmachine.Coins;
+package com.sg.vendingmachine.transaction;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
@@ -13,7 +10,7 @@ public class ChangeService {
     private static final String NICKEL_VALUE = Coins.NICKEL.getValue();
     private static final String PENNY_VALUE = Coins.PENNY.getValue();
 
-    public Change computeChange(BigDecimal amountToReturn) {
+    Change computeChange(BigDecimal amountToReturn) {
         BigDecimal amountInPennies = amountToReturn.multiply(new BigDecimal("100"));
 
         int numOfQuarters = computeQuarters(amountInPennies);

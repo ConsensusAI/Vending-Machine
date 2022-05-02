@@ -1,10 +1,8 @@
-package com.sg.vendingmachine.dao;
-
-import com.sg.vendingmachine.dto.ItemDto;
+package com.sg.vendingmachine.inventory;
 
 import java.math.BigDecimal;
 
-public class ItemMapper {
+class ItemMapper {
 
     private static final String DELIMITER = "::";
 

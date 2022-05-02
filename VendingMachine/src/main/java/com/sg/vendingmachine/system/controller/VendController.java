@@ -1,14 +1,14 @@
-package com.sg.vendingmachine.controller;
+package com.sg.vendingmachine.system.controller;
 
-import com.sg.vendingmachine.Change;
-import com.sg.vendingmachine.dao.AuditPersistenceException;
-import com.sg.vendingmachine.dao.InventoryPersistenceException;
-import com.sg.vendingmachine.dto.ItemDto;
-import com.sg.vendingmachine.service.InsufficientFundsException;
-import com.sg.vendingmachine.service.InventoryService;
-import com.sg.vendingmachine.service.NoStockException;
-import com.sg.vendingmachine.service.TransactionService;
-import com.sg.vendingmachine.ui.VendView;
+import com.sg.vendingmachine.audit.AuditPersistenceException;
+import com.sg.vendingmachine.inventory.InventoryPersistenceException;
+import com.sg.vendingmachine.inventory.InventoryService;
+import com.sg.vendingmachine.inventory.ItemDto;
+import com.sg.vendingmachine.system.ui.VendView;
+import com.sg.vendingmachine.transaction.Change;
+import com.sg.vendingmachine.transaction.InsufficientFundsException;
+import com.sg.vendingmachine.transaction.NoStockException;
+import com.sg.vendingmachine.transaction.TransactionService;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

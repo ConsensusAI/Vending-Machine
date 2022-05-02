@@ -1,10 +1,8 @@
-package com.sg.vendingmachine.dao;
-
-import com.sg.vendingmachine.dto.ItemDto;
+package com.sg.vendingmachine.inventory;
 
 import java.util.List;
 
-public interface VendInventoryDao {
+interface InventoryDao {
 
     List<ItemDto> getAllItems() throws InventoryPersistenceException;
 

@@ -1,10 +1,10 @@
-package com.sg.vendingmachine.ui;
+package com.sg.vendingmachine.system.ui;
 
 import utils.GenerateIntegerInput;
 
 import java.util.Scanner;
 
-public class UserIOConsoleImpl implements UserIO{
+public class UserIOConsoleImpl implements UserIO {
     private static final Scanner scanner = new Scanner(System.in);
     private static final GenerateIntegerInput userInput = new GenerateIntegerInput();
 

@@ -1,4 +1,4 @@
-package com.sg.vendingmachine.service;
+package com.sg.vendingmachine.transaction;
 
 public class InsufficientFundsException extends Exception {
 
