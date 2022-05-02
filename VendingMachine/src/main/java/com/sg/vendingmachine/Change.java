@@ -1,49 +1,51 @@
 package com.sg.vendingmachine;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 
 public class Change {
 
-    private BigDecimal amountInPennies;
-    private static final String QUARTER_VALUE = Coins.QUARTER.getValue();
-    private static final String DIME_VALUE = Coins.DIME.getValue();
-    private static final String NICKEL_VALUE = Coins.NICKEL.getValue();
-    private static final String PENNY_VALUE = Coins.PENNY.getValue();
+    private final BigDecimal total;
+    private final int quarters;
+    private final int dimes;
+    private final int nickels;
+    private final int pennies;
 
-    public Change(BigDecimal amount) {
-        amountInPennies = amount.multiply(new BigDecimal("100"));
+    public Change(BigDecimal total, int quarters, int dimes, int nickels, int pennies) {
+        this.total = total;
+        this.quarters = quarters;
+        this.dimes = dimes;
+        this.nickels = nickels;
+        this.pennies = pennies;
     }
 
-    public int returnQuarters() {
-        BigDecimal quarters = amountInPennies.divide(new BigDecimal(QUARTER_VALUE), 0, RoundingMode.DOWN);
-        setAmountInPennies(amountInPennies.subtract(quarters.multiply(new BigDecimal(QUARTER_VALUE))));
-        return quarters.intValue();
+    public BigDecimal getTotal() {
+        return total;
     }
 
-    public int returnDimes() {
-        BigDecimal dimes = amountInPennies.divide(new BigDecimal(DIME_VALUE), 0, RoundingMode.DOWN);
-        setAmountInPennies(amountInPennies.subtract(dimes.multiply(new BigDecimal(DIME_VALUE))));
-        return dimes.intValue();
+    public int getQuarters() {
+        return quarters;
     }
 
-
-    public int returnNickels() {
-        BigDecimal nickels = amountInPennies.divide(new BigDecimal(NICKEL_VALUE), 0, RoundingMode.DOWN);
-        setAmountInPennies(amountInPennies.subtract(nickels.multiply(new BigDecimal(NICKEL_VALUE))));
-        return nickels.intValue();
+    public int getDimes() {
+        return dimes;
     }
 
-    public int returnPennies() {
-        BigDecimal pennies = amountInPennies.divide(new BigDecimal(PENNY_VALUE), 0, RoundingMode.DOWN);
-        return this.amountInPennies.intValue();
+    public int getNickels() {
+        return nickels;
     }
 
-    public void setAmountInPennies(BigDecimal amountInPennies) {
-        this.amountInPennies = amountInPennies;
+    public int getPennies() {
+        return pennies;
     }
 
-    public BigDecimal getAmountInPennies() {
-        return amountInPennies;
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append("Total: $" + total + " ");
+        builder.append(Coins.QUARTER.getName() + ": " + quarters + " ");
+        builder.append(Coins.DIME.getName() + ": " + dimes + " ");
+        builder.append(Coins.NICKEL.getName() + ": " + nickels + " ");
+        builder.append(Coins.PENNY.getName() + ": " + pennies);
+        return builder.toString();
     }
 }

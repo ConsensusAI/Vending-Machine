@@ -1,16 +1,24 @@
 package com.sg.vendingmachine;
 
 public enum Coins {
-    PENNY("1"),
-    NICKEL("5"),
-    DIME("10"),
-    QUARTER("25");
+    PENNY("1", "Pennies"),
+    NICKEL("5", "Nickels"),
+    DIME("10", "Dimes"),
+    QUARTER("25", "Quarters");
 
     private final String value;
+    private final String name;
 
-    Coins(String value) {this.value = value;}
+    Coins(String value, String name) {
+        this.value = value;
+        this.name = name;
+    }
 
     public String getValue() {
         return value;
+    }
+
+    public String getName() {
+        return name;
     }
 }
