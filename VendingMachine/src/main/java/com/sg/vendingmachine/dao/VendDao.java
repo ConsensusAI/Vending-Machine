@@ -13,7 +13,7 @@ public interface VendDao {
 
     int getItemStock(String name) throws VendPersistenceException;
 
-    void reduceItemStock(String name);
+    void reduceItemStock(String name) throws VendPersistenceException;
 
     BigDecimal getItemCost(String id) throws VendPersistenceException;
 

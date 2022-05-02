@@ -51,9 +51,10 @@ public class VendController {
         BigDecimal moneyInserted = view.promptMoneyInserted().setScale(2);
         int itemSelection;
         boolean keepGoing = true;
-        List<ItemDto> allItems = dao.getAllItems();
+        List<ItemDto> allItems;
 
         while (keepGoing) {
+            allItems = dao.getAllItems();
             view.printItems(allItems);
             view.printMoney(moneyInserted);
             itemSelection = view.printItemsAndGetSelection(allItems);

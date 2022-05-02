@@ -118,8 +118,10 @@ public class VendDaoFileImpl implements VendDao {
     }
 
     @Override
-    public void reduceItemStock(String id) {
+    public void reduceItemStock(String id) throws VendPersistenceException {
+        loadInventory();
         items.get(id).reduceStock();
+        writeInventory();
     }
 
     @Override
