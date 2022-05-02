@@ -1,8 +1,8 @@
 package com.sg.vendingmachine.controller;
 
-import com.sg.vendingmachine.dao.VendDao;
 import com.sg.vendingmachine.dao.VendPersistenceException;
 import com.sg.vendingmachine.dto.ItemDto;
+import com.sg.vendingmachine.service.VendServiceLayer;
 import com.sg.vendingmachine.ui.VendView;
 
 import java.math.BigDecimal;
@@ -11,11 +11,11 @@ import java.util.List;
 public class VendController {
 
     private VendView view;
-    private VendDao dao;
+    private VendServiceLayer service;
 
-    public VendController(VendView view, VendDao dao) {
+    public VendController(VendServiceLayer service, VendView view) {
         this.view = view;
-        this.dao = dao;
+        this.service = service;
     }
 
     public void run() {
@@ -25,7 +25,7 @@ public class VendController {
         try {
             while (keepGoing) {
                 view.printWelcomeBanner();
-                view.printItems(dao.getAllItems());
+                view.printItems(service.getAllItems());
                 menuSelection = view.printMenuAndGetSelection();
 
                 switch (menuSelection) {
@@ -54,7 +54,7 @@ public class VendController {
         List<ItemDto> allItems;
 
         while (keepGoing) {
-            allItems = dao.getAllItems();
+            allItems = service.getAllItems();
             view.printItems(allItems);
             view.printMoney(moneyInserted);
             itemSelection = view.printItemsAndGetSelection(allItems);
@@ -70,9 +70,8 @@ public class VendController {
             } else {
                 boolean canAfford = compareMoney(moneyInserted, String.valueOf(itemSelection));
                 if (canAfford) {
-                    moneyInserted = dao.subtractMoney(moneyInserted, itemId);
+                    moneyInserted = subtractMoney(moneyInserted, itemId);
                     view.printMoney(moneyInserted);
-                    dao.reduceItemStock(itemId);
                 } else {
                     view.printCannotAfford();
                 }
@@ -81,11 +80,15 @@ public class VendController {
     }
 
     private boolean compareMoney(BigDecimal userMoney, String itemId) throws VendPersistenceException {
-        return userMoney.compareTo(dao.getItemCost(itemId)) >= 0;
+        return service.compareMoney(userMoney, itemId);
     }
 
     private boolean checkStock(String itemId) throws VendPersistenceException {
-        return dao.getItemStock(itemId) > 0;
+        return service.checkStock(itemId);
+    }
+
+    private BigDecimal subtractMoney(BigDecimal moneyInserted, String itemId) throws VendPersistenceException {
+        return service.subtractMoney(moneyInserted, itemId);
     }
 
     private void unknown() {
