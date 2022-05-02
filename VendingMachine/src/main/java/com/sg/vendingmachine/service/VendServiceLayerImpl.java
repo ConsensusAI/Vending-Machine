@@ -22,14 +22,14 @@ public class VendServiceLayerImpl implements VendServiceLayer {
 
     @Override
     public void checkStock(String itemId) throws VendPersistenceException, VendNoItemInventoryException {
-        if (dao.getItem(itemId).getStock() < 0) {
+        if (dao.getItem(itemId).getStock() <= 0) {
             throw new VendNoItemInventoryException("ERROR: Item is out of stock.");
         }
     }
 
     @Override
     public void compareMoney(BigDecimal userMoney, String itemId) throws VendPersistenceException, VendInsufficientFundsException {
-        if (userMoney.compareTo(dao.getItemCost(itemId)) >= 0) {
+        if (userMoney.compareTo(dao.getItemCost(itemId)) < 0) {
             throw new VendInsufficientFundsException("ERROR: Insufficient funds.");
         }
     }
@@ -39,8 +39,8 @@ public class VendServiceLayerImpl implements VendServiceLayer {
             VendNoItemInventoryException,
             VendInsufficientFundsException{
         compareMoney(moneyInserted, itemId);
-        moneyInserted = dao.subtractMoney(moneyInserted, itemId);
         checkStock(itemId);
+        moneyInserted = dao.subtractMoney(moneyInserted, itemId);
         dao.reduceItemStock(itemId);
         return moneyInserted;
     }

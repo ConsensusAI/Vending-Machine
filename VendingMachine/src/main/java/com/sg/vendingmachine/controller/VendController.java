@@ -2,6 +2,8 @@ package com.sg.vendingmachine.controller;
 
 import com.sg.vendingmachine.dao.VendPersistenceException;
 import com.sg.vendingmachine.dto.ItemDto;
+import com.sg.vendingmachine.service.VendInsufficientFundsException;
+import com.sg.vendingmachine.service.VendNoItemInventoryException;
 import com.sg.vendingmachine.service.VendServiceLayer;
 import com.sg.vendingmachine.ui.VendView;
 
@@ -41,53 +43,36 @@ public class VendController {
             }
 
             exitMessage();
-        } catch (VendPersistenceException e) {
+        } catch (VendPersistenceException |
+                VendNoItemInventoryException |
+                VendInsufficientFundsException e) {
             view.printErrorMessage(e.getMessage());
         }
 
     }
 
-    private void purchaseItem() throws VendPersistenceException{
+    private void purchaseItem() throws VendPersistenceException,
+            VendNoItemInventoryException,
+            VendInsufficientFundsException {
         BigDecimal moneyInserted = view.promptMoneyInserted().setScale(2);
         int itemSelection;
-        boolean keepGoing = true;
         List<ItemDto> allItems;
 
-        while (keepGoing) {
+        while (true) {
             allItems = service.getAllItems();
             view.printItems(allItems);
             view.printMoney(moneyInserted);
             itemSelection = view.printItemsAndGetSelection(allItems);
             if (itemSelection == allItems.size() + 1) {
-                keepGoing = false;
                 break;
             }
 
             String itemId = String.valueOf(itemSelection);
-            boolean hasStock = checkStock(itemId);
-            if (!hasStock) {
-                view.printOutOfStock();
-            } else {
-                boolean canAfford = compareMoney(moneyInserted, String.valueOf(itemSelection));
-                if (canAfford) {
-                    moneyInserted = subtractMoney(moneyInserted, itemId);
-                    view.printMoney(moneyInserted);
-                } else {
-                    view.printCannotAfford();
-                }
-            }
+            moneyInserted = subtractMoney(moneyInserted, itemId);
         }
     }
 
-    private boolean compareMoney(BigDecimal userMoney, String itemId) throws VendPersistenceException {
-        return service.compareMoney(userMoney, itemId);
-    }
-
-    private boolean checkStock(String itemId) throws VendPersistenceException {
-        return service.checkStock(itemId);
-    }
-
-    private BigDecimal subtractMoney(BigDecimal moneyInserted, String itemId) throws VendPersistenceException {
+    private BigDecimal subtractMoney(BigDecimal moneyInserted, String itemId) throws VendPersistenceException, VendNoItemInventoryException, VendInsufficientFundsException {
         return service.subtractMoney(moneyInserted, itemId);
     }
 
