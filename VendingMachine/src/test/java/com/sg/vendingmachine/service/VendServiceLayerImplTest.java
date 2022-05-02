@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 
 import java.math.BigDecimal;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.fail;
 
 class VendServiceLayerImplTest {
@@ -57,5 +58,15 @@ class VendServiceLayerImplTest {
         } catch (VendInsufficientFundsException e) {
             return;
         }
+    }
+
+    @Test
+    public void testChangeReturned() throws Exception {
+        BigDecimal testMoney = new BigDecimal("13.93");
+
+        BigDecimal returnedMoney = service.subtractMoney(testMoney, "1");
+        String expected = "Your change: \n15 Quarters\n1 Dime\n1 Nickel\n4 Pennies";
+        String output = service.returnChange(returnedMoney);
+        assertEquals(expected, output, "The change should be 15 Quarters, 1 Dime, 1 Nickel, 4 Pennies");
     }
 }

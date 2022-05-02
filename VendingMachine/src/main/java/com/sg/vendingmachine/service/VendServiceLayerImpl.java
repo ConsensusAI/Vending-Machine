@@ -59,16 +59,26 @@ public class VendServiceLayerImpl implements VendServiceLayer {
         int nickels = change.returnNickels();
         int pennies = change.returnPennies();
         String moneyReturned = "Your change: ";
-        if (quarters > 0) {
+        if (quarters > 1) {
             moneyReturned += "\n" + quarters + " Quarters";
+        } else if (quarters == 1) {
+            moneyReturned += "\n" + quarters + " Quarter";
         }
-        if (dimes > 0) {
+        if (dimes > 1) {
             moneyReturned += "\n" + dimes + " Dimes";
+        } else if (dimes == 1) {
+            moneyReturned += "\n" + dimes + " Dime";
         }
-        if (nickels > 0) {
+        if (nickels > 1) {
             moneyReturned += "\n" + nickels + " Nickels";
+        } else if (nickels == 1) {
+            moneyReturned += "\n" + nickels + " Nickel";
         }
-        moneyReturned += "\n" + pennies + " Pennies";
+        if (pennies == 1) {
+            moneyReturned += "\n" + pennies + " Penny";
+        } else {
+            moneyReturned += "\n" + pennies + " Pennies";
+        }
         return moneyReturned;
     }
 }
