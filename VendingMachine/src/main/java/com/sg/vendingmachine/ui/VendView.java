@@ -60,15 +60,8 @@ public class VendView {
         io.print("");
     }
 
-    public void printCannotAfford() {
-        io.print("You do not have enough funds to purchase that item.");
-        io.print("Please insert more money or cancel.");
-        io.print("");
-    }
-
-    public void printOutOfStock() {
-        io.print("Sorry, that item is out of stock.");
-        io.print("");
+    public void printChange(String moneyReturned) {
+        io.print(moneyReturned);
     }
 
     public void printUnknown() {

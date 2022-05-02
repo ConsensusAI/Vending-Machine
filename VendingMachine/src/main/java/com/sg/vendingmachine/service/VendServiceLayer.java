@@ -17,4 +17,6 @@ public interface VendServiceLayer {
     BigDecimal subtractMoney(BigDecimal moneyInserted, String itemId) throws VendPersistenceException,
             VendNoItemInventoryException,
             VendInsufficientFundsException;
+
+    String returnChange(BigDecimal amount);
 }

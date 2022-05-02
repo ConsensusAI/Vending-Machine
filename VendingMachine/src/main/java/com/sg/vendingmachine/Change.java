@@ -9,31 +9,33 @@ public class Change {
     private final String QUARTER_VALUE = Coins.QUARTER.toString();
     private final String DIME_VALUE = Coins.DIME.toString();
     private final String NICKEL_VALUE = Coins.NICKEL.toString();
+    private final String PENNY_VALUE = Coins.PENNY.toString();
 
     public Change(BigDecimal amount) {
         amountInPennies = amount.multiply(new BigDecimal("100"));
     }
 
     public int returnQuarters() {
-        BigDecimal quarters = amountInPennies.divide(new BigDecimal(QUARTER_VALUE),RoundingMode.HALF_DOWN);
-        setAmountInPennies(amountInPennies.subtract(quarters));
+        BigDecimal quarters = amountInPennies.divide(new BigDecimal(QUARTER_VALUE), 0, RoundingMode.DOWN);
+        setAmountInPennies(amountInPennies.subtract(quarters.multiply(new BigDecimal(QUARTER_VALUE))));
         return quarters.intValue();
     }
 
     public int returnDimes() {
-        BigDecimal dimes = amountInPennies.divide(new BigDecimal(DIME_VALUE),RoundingMode.HALF_DOWN);
-        setAmountInPennies(amountInPennies.subtract(dimes));
+        BigDecimal dimes = amountInPennies.divide(new BigDecimal(DIME_VALUE), 0, RoundingMode.DOWN);
+        setAmountInPennies(amountInPennies.subtract(dimes.multiply(new BigDecimal(DIME_VALUE))));
         return dimes.intValue();
     }
 
 
     public int returnNickels() {
-        BigDecimal nickels = amountInPennies.divide(new BigDecimal(NICKEL_VALUE),RoundingMode.HALF_DOWN);
-        setAmountInPennies(amountInPennies.subtract(nickels));
+        BigDecimal nickels = amountInPennies.divide(new BigDecimal(NICKEL_VALUE), 0, RoundingMode.DOWN);
+        setAmountInPennies(amountInPennies.subtract(nickels.multiply(new BigDecimal(NICKEL_VALUE))));
         return nickels.intValue();
     }
 
     public int returnPennies() {
+        BigDecimal pennies = amountInPennies.divide(new BigDecimal(PENNY_VALUE), 0, RoundingMode.DOWN);
         return this.amountInPennies.intValue();
     }
 

@@ -56,6 +56,7 @@ public class VendController {
             VendInsufficientFundsException {
         BigDecimal moneyInserted = view.promptMoneyInserted().setScale(2);
         int itemSelection;
+        boolean itemPurchased = false;
         List<ItemDto> allItems;
 
         while (true) {
@@ -69,6 +70,11 @@ public class VendController {
 
             String itemId = String.valueOf(itemSelection);
             moneyInserted = subtractMoney(moneyInserted, itemId);
+            itemPurchased = true;
+        }
+
+        if (itemPurchased) {
+            view.printChange(service.returnChange(moneyInserted));
         }
     }
 
