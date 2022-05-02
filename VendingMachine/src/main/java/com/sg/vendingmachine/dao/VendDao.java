@@ -18,4 +18,6 @@ public interface VendDao {
     BigDecimal getItemCost(String id) throws VendPersistenceException;
 
     BigDecimal subtractMoney(BigDecimal initMoney, String itemId);
+
+    ItemDto addItem(String id, ItemDto item) throws VendPersistenceException;
 }

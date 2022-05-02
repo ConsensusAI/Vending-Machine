@@ -20,6 +20,13 @@ public class VendDaoFileImpl implements VendDao {
         this.INVENTORY_FILE = inventoryTextFile;
     }
 
+    public ItemDto addItem(String id, ItemDto item) throws VendPersistenceException {
+        loadInventory();
+        ItemDto newItem = items.put(id, item);
+        writeInventory();
+        return newItem;
+    }
+
     private ItemDto unmarshallItem(String itemAsText) {
         /*
          _______________________________
