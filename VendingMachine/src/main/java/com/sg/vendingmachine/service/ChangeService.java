@@ -59,6 +59,7 @@ public class ChangeService {
         } else {
             penniesReturned += "\n" + pennies + " Pennies";
         }
+        return penniesReturned;
     }
 
 }
