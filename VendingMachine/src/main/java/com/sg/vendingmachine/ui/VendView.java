@@ -4,6 +4,7 @@ import com.sg.vendingmachine.dto.ItemDto;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 public class VendView {
 
@@ -19,9 +20,11 @@ public class VendView {
         io.print("");
     }
 
-    public void printItems(List<ItemDto> items) {
+    public void printItems(Map<String, ItemDto> items) {
         io.print("******Current Inventory******");
-        items.forEach(x -> io.print(x.getName() + ", $" + x.getCost() + ", " + x.getStock() + " remaining."));
+        items.entrySet()
+                .forEach(x -> io.print(x.getValue().getName() + ", $" + x.getValue().getCost() +
+                        ", " + x.getValue().getStock() + " remaining."));
     }
 
     public int printMenuAndGetSelection() {
@@ -38,13 +41,15 @@ public class VendView {
         return new BigDecimal(io.readString("How much money would you like to insert? (Please enter a value)"));
     }
 
-    public int printItemsAndGetSelection(List<ItemDto> items) {
+    public int printItemsAndGetSelection(Map<String, ItemDto> items) {
         io.print("");
         io.print("================================");
         io.print("Which item would you like to buy?");
-        items.forEach(x -> io.print(x.getId() + ". " + x.getName()));
-        io.print("6. Exit");
-        return io.readInt("Please select from the above choices.", 1, 6);
+        int max = items.size() + 1;
+        items.entrySet()
+                .forEach(x -> io.print(x.getKey() + ". " + x.getValue().getName()));
+        io.print(max + ". Exit");
+        return io.readInt("Please select from the above choices.", 1, max);
     }
 
     public void printUnknown() {

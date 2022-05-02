@@ -6,12 +6,13 @@ import com.sg.vendingmachine.ui.VendView;
 
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 public class VendController {
 
     private VendView view;
     private VendDao dao;
-    private List<ItemDto> allItems;
+    private Map<String, ItemDto> allItems;
 
     public VendController(VendView view, VendDao dao) {
         this.view = view;

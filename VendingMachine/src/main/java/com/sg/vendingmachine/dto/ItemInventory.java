@@ -1,8 +1,7 @@
 package com.sg.vendingmachine.dto;
 
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Map;
 
 public class ItemInventory {
     private BigDecimal CHOCOLATE_PRICE = new BigDecimal("1.25");
@@ -15,27 +14,22 @@ public class ItemInventory {
     private ItemDto WATER_BOTTLE;
     private ItemDto GRANOLA_BAR;
     private ItemDto CHIPS;
-    private List<ItemDto> allItems;
+    private Map<String, ItemDto> allItems;
 
     public ItemInventory() {
-        this.CHOCOLATE_BAR = new ItemDto("1","Chocolate Bar", CHOCOLATE_PRICE, 12);
-        this.SPORTS_DRINK = new ItemDto("2","Sports Drink", SPORTS_PRICE, 4);
-        this.WATER_BOTTLE = new ItemDto("3","Water Bottle", WATER_PRICE, 5);
-        this.GRANOLA_BAR = new ItemDto("4","Granola Bar", GRANOLA_PRICE, 8);
-        this.CHIPS = new ItemDto("5","Potato Chips", CHIPS_PRICE, 6);
-        this.allItems = new ArrayList<>();
-        allItems.add(CHOCOLATE_BAR);
-        allItems.add(SPORTS_DRINK);
-        allItems.add(WATER_BOTTLE);
-        allItems.add(GRANOLA_BAR);
-        allItems.add(CHIPS);
+        this.CHOCOLATE_BAR = new ItemDto("Chocolate Bar", CHOCOLATE_PRICE, 12);
+        this.SPORTS_DRINK = new ItemDto("Sports Drink", SPORTS_PRICE, 4);
+        this.WATER_BOTTLE = new ItemDto("Water Bottle", WATER_PRICE, 5);
+        this.GRANOLA_BAR = new ItemDto("Granola Bar", GRANOLA_PRICE, 8);
+        this.CHIPS = new ItemDto("Potato Chips", CHIPS_PRICE, 6);
+        allItems.put("1", CHOCOLATE_BAR);
+        allItems.put("2", SPORTS_DRINK);
+        allItems.put("3", WATER_BOTTLE);
+        allItems.put("4", GRANOLA_BAR);
+        allItems.put("5", CHIPS);
     }
 
-    public ItemDto getCHIPS() {
-        return CHIPS;
-    }
-
-    public List<ItemDto> getAllItems() {
+    public Map<String, ItemDto> getAllItems() {
         return allItems;
     }
 }
