@@ -8,7 +8,7 @@ import java.util.Map;
 
 public class VendView {
 
-    private UserIO io;
+    private final UserIO io;
 
     public VendView(UserIO io) {
         this.io = io;

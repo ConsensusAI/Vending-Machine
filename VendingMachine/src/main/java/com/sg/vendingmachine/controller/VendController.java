@@ -13,7 +13,7 @@ public class VendController {
 
     private final VendView view;
     private final InventoryService inventoryService;
-    private TransactionService transactionService;
+    private final TransactionService transactionService;
 
     public VendController(InventoryService inventoryService, VendView view, TransactionService transactionService) {
         this.view = view;
