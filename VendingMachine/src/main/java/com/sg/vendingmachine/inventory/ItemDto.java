@@ -1,4 +1,4 @@
-package com.sg.vendingmachine.dto;
+package com.sg.vendingmachine.inventory;
 
 import java.math.BigDecimal;
 import java.util.Objects;
@@ -27,10 +27,6 @@ public class ItemDto {
 
     public int getStock() {
         return stock;
-    }
-
-    public void reduceStock() {
-        this.stock--;
     }
 
     public void setName(String name) {

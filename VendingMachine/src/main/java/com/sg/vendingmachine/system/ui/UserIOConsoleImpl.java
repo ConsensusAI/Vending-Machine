@@ -1,4 +1,4 @@
-package com.sg.vendingmachine.ui;
+package com.sg.vendingmachine.system.ui;
 
 import utils.GenerateIntegerInput;
 
