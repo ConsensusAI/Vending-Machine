@@ -2,7 +2,7 @@ package com.sg.vendingmachine.service;
 
 import com.sg.vendingmachine.dao.VendAuditDao;
 import com.sg.vendingmachine.dao.VendInventoryDao;
-import com.sg.vendingmachine.dao.VendPersistenceException;
+import com.sg.vendingmachine.dao.AuditPersistenceException;
 
 import java.math.BigDecimal;
 
@@ -17,19 +17,19 @@ public class TransactionService {
         this.changeService = new ChangeService();
     }
 
-    public void checkStock(String itemId) throws VendPersistenceException, NoStockException {
+    public void checkStock(String itemId) throws AuditPersistenceException, NoStockException {
         if (inventoryDao.getItem(itemId).getStock() <= 0) {
             throw new NoStockException("ERROR: Item is out of stock.");
         }
     }
 
-    public void compareMoney(BigDecimal userMoney, String itemId) throws VendPersistenceException, InsufficientFundsException {
+    public void compareMoney(BigDecimal userMoney, String itemId) throws AuditPersistenceException, InsufficientFundsException {
         if (userMoney.compareTo(inventoryDao.getItemCost(itemId)) < 0) {
             throw new InsufficientFundsException("ERROR: Insufficient funds.");
         }
     }
 
-    public BigDecimal subtractMoney(BigDecimal moneyInserted, String itemId) throws VendPersistenceException,
+    public BigDecimal subtractMoney(BigDecimal moneyInserted, String itemId) throws AuditPersistenceException,
             NoStockException,
             InsufficientFundsException {
         compareMoney(moneyInserted, itemId);

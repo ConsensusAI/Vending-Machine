@@ -2,7 +2,7 @@ package com.sg.vendingmachine.service;
 
 import com.sg.vendingmachine.dao.VendAuditDao;
 import com.sg.vendingmachine.dao.VendInventoryDao;
-import com.sg.vendingmachine.dao.VendPersistenceException;
+import com.sg.vendingmachine.dao.AuditPersistenceException;
 import com.sg.vendingmachine.dto.ItemDto;
 import org.junit.jupiter.api.Test;
 
@@ -36,7 +36,7 @@ public class TransactionServiceTest {
         try {
             testService.subtractMoney(testMoney, testItem.getId());
             fail("Expected NoItemInventoryException was not thrown.");
-        } catch (VendPersistenceException
+        } catch (AuditPersistenceException
                 | InsufficientFundsException e) {
             fail("Incorrect exception was thrown.");
         } catch (NoStockException e) {
@@ -51,7 +51,7 @@ public class TransactionServiceTest {
         try {
             transactionService.subtractMoney(testMoney, "1");
             fail("Expected InsufficientfundsException was not thrown.");
-        } catch (VendPersistenceException
+        } catch (AuditPersistenceException
         | NoStockException e) {
             fail("Incorrect exception was thrown.");
         } catch (InsufficientFundsException e) {

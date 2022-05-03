@@ -8,9 +8,8 @@ import java.util.*;
 
 public class VendInventoryDaoTxtImpl implements VendInventoryDao {
 
-    private Map<String, ItemDto> inventory = new HashMap<>();
+    private final Map<String, ItemDto> inventory = new HashMap<>();
     private final String inventoryFile;
-    private static final String DELIMITER = "::";
 
     public VendInventoryDaoTxtImpl() {
         inventoryFile = "inventory.txt";
@@ -20,37 +19,26 @@ public class VendInventoryDaoTxtImpl implements VendInventoryDao {
         this.inventoryFile = inventoryTextFile;
     }
 
-    public ItemDto addItem(String id, ItemDto item) throws VendPersistenceException {
+    @Override
+    public List<ItemDto> getAllItems() throws InventoryPersistenceException {
         loadInventory();
-        ItemDto newItem = inventory.put(id, item);
+        return new ArrayList<>(inventory.values());
+    }
+
+    @Override
+    public ItemDto getItem(String id) throws InventoryPersistenceException {
+        loadInventory();
+        return inventory.get(id);
+    }
+
+    @Override
+    public void updateItem(String id, ItemDto item) throws InventoryPersistenceException {
+        loadInventory();
+        inventory.put(id, item);
         writeInventory();
-        return newItem;
     }
 
-    private ItemDto unmarshallItem(String itemAsText) {
-        /*
-         _______________________________
-         |   |             |      |    |
-         | 1 |Chocolate Bar| 1.25 | 12 |
-         |   |             |      |    |
-         -------------------------------
-         [0]       [1]       [2]   [3]
-         */
-
-        String[] itemTokens = itemAsText.split(DELIMITER);
-        String id = itemTokens[0];
-        ItemDto itemFromFile = new ItemDto(id);
-
-        itemFromFile.setName(itemTokens[1]);
-        BigDecimal cost = new BigDecimal(itemTokens[2]);
-        itemFromFile.setCost(cost);
-        int stock = Integer.parseInt(itemTokens[3]);
-        itemFromFile.setStock(stock);
-
-        return itemFromFile;
-    }
-
-    private void loadInventory() throws VendPersistenceException {
+    private void loadInventory() throws InventoryPersistenceException {
         Scanner scanner;
 
         try {
@@ -58,82 +46,35 @@ public class VendInventoryDaoTxtImpl implements VendInventoryDao {
                     new BufferedReader(
                             new FileReader(inventoryFile)));
         } catch (FileNotFoundException e) {
-            throw new VendPersistenceException("Could not load inventory data into memory", e);
+            throw new InventoryPersistenceException("Could not load inventory data into memory", e);
         }
         String currentLine;
         ItemDto currentItem;
 
         while (scanner.hasNextLine()) {
             currentLine = scanner.nextLine();
-            currentItem = unmarshallItem(currentLine);
+            currentItem = ItemMapper.toDto(currentLine);
             inventory.put(currentItem.getId(), currentItem);
         }
         scanner.close();
     }
 
-    private String marshallItem(ItemDto item) {
-        // 1::Chocolate Bar::1.25::12
-        String itemAsText = item.getId() + DELIMITER;
-        itemAsText += item.getName() + DELIMITER;
-        itemAsText += item.getCost() + DELIMITER;
-        itemAsText += item.getStock();
-
-        return itemAsText;
-    }
-
-    private void writeInventory() throws VendPersistenceException {
+    private void writeInventory() throws InventoryPersistenceException {
         PrintWriter out;
 
         try {
             out = new PrintWriter(new FileWriter(inventoryFile));
         } catch (IOException e) {
-            throw new VendPersistenceException("Could not save inventory data.");
+            throw new InventoryPersistenceException("Could not save inventory data.");
         }
 
         String itemAsText;
         List<ItemDto> items = this.getAllItems();
         for (ItemDto currentItem : items) {
-            itemAsText = marshallItem(currentItem);
+            itemAsText = ItemMapper.toText(currentItem);
             out.println(itemAsText);
             out.flush();
         }
         out.close();
-    }
-
-    @Override
-    public List<ItemDto> getAllItems() throws VendPersistenceException {
-        loadInventory();
-        return new ArrayList<ItemDto>(inventory.values());
-    }
-
-    @Override
-    public ItemDto getItem(String id) throws VendPersistenceException {
-        loadInventory();
-        return inventory.get(id);
-    }
-
-    @Override
-    public int getItemStock(String id) throws VendPersistenceException {
-        loadInventory();
-        return inventory.get(id).getStock();
-    }
-
-    @Override
-    public void reduceItemStock(String id) throws VendPersistenceException {
-        loadInventory();
-        inventory.get(id).reduceStock();
-        writeInventory();
-    }
-
-    @Override
-    public BigDecimal getItemCost(String id) throws VendPersistenceException {
-        loadInventory();
-        return inventory.get(id).getCost();
-    }
-
-    @Override
-    public BigDecimal subtractMoney(BigDecimal initMoney, String itemId) {
-        BigDecimal cost = inventory.get(itemId).getCost();
-        return initMoney.subtract(cost);
     }
 }

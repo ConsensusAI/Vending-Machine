@@ -1,7 +1,7 @@
 package com.sg.vendingmachine.service;
 
 import com.sg.vendingmachine.dao.VendInventoryDao;
-import com.sg.vendingmachine.dao.VendPersistenceException;
+import com.sg.vendingmachine.dao.AuditPersistenceException;
 import com.sg.vendingmachine.dto.ItemDto;
 
 import java.math.BigDecimal;
@@ -24,14 +24,14 @@ public class VendInventoryDaoStubImpl implements VendInventoryDao {
     }
 
     @Override
-    public List<ItemDto> getAllItems() throws VendPersistenceException {
+    public List<ItemDto> getAllItems() throws AuditPersistenceException {
         List<ItemDto> allItems = new ArrayList<>();
         allItems.add(onlyItem);
         return allItems;
     }
 
     @Override
-    public ItemDto getItem(String id) throws VendPersistenceException {
+    public ItemDto getItem(String id) throws AuditPersistenceException {
         if (id.equals(onlyItem.getId())) {
             return onlyItem;
         }
@@ -39,7 +39,7 @@ public class VendInventoryDaoStubImpl implements VendInventoryDao {
     }
 
     @Override
-    public int getItemStock(String id) throws VendPersistenceException {
+    public int getItemStock(String id) throws AuditPersistenceException {
         if (id.equals(onlyItem.getId())) {
             return onlyItem.getStock();
         }
@@ -47,14 +47,14 @@ public class VendInventoryDaoStubImpl implements VendInventoryDao {
     }
 
     @Override
-    public void reduceItemStock(String id) throws VendPersistenceException {
+    public void reduceItemStock(String id) throws AuditPersistenceException {
         if (id.equals(onlyItem.getId())) {
             onlyItem.reduceStock();
         }
     }
 
     @Override
-    public BigDecimal getItemCost(String id) throws VendPersistenceException {
+    public BigDecimal getItemCost(String id) throws AuditPersistenceException {
         if (id.equals(onlyItem.getId())) {
             return onlyItem.getCost();
         }
@@ -71,7 +71,7 @@ public class VendInventoryDaoStubImpl implements VendInventoryDao {
     }
 
     @Override
-    public ItemDto addItem(String id, ItemDto item) throws VendPersistenceException {
+    public ItemDto addItem(String id, ItemDto item) throws AuditPersistenceException {
         if (id.equals(onlyItem.getId())) {
             return onlyItem;
         }

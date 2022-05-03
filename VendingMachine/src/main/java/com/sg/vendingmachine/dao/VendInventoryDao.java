@@ -7,17 +7,9 @@ import java.util.List;
 
 public interface VendInventoryDao {
 
-    List<ItemDto> getAllItems() throws VendPersistenceException;
+    List<ItemDto> getAllItems() throws InventoryPersistenceException;
 
-    ItemDto getItem(String id) throws VendPersistenceException;
+    ItemDto getItem(String id) throws InventoryPersistenceException;
 
-    int getItemStock(String id) throws VendPersistenceException;
-
-    void reduceItemStock(String id) throws VendPersistenceException;
-
-    BigDecimal getItemCost(String id) throws VendPersistenceException;
-
-    BigDecimal subtractMoney(BigDecimal initMoney, String itemId);
-
-    ItemDto addItem(String id, ItemDto item) throws VendPersistenceException;
+   void updateItem(String id, ItemDto item) throws InventoryPersistenceException;
 }

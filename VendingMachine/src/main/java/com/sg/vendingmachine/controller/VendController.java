@@ -1,6 +1,6 @@
 package com.sg.vendingmachine.controller;
 
-import com.sg.vendingmachine.dao.VendPersistenceException;
+import com.sg.vendingmachine.dao.AuditPersistenceException;
 import com.sg.vendingmachine.dto.ItemDto;
 import com.sg.vendingmachine.service.*;
 import com.sg.vendingmachine.ui.VendView;
@@ -44,7 +44,7 @@ public class VendController {
             }
 
             exitMessage();
-        } catch (VendPersistenceException |
+        } catch (AuditPersistenceException |
                 NoStockException |
                 InsufficientFundsException e) {
             view.printErrorMessage(e.getMessage());
@@ -52,7 +52,7 @@ public class VendController {
 
     }
 
-    private void purchaseItem() throws VendPersistenceException,
+    private void purchaseItem() throws AuditPersistenceException,
             NoStockException,
             InsufficientFundsException {
         BigDecimal moneyInserted = view.promptMoneyInserted().setScale(2, RoundingMode.HALF_UP);
@@ -79,7 +79,7 @@ public class VendController {
         }
     }
 
-    private BigDecimal subtractMoney(BigDecimal moneyInserted, String itemId) throws VendPersistenceException, NoStockException, InsufficientFundsException {
+    private BigDecimal subtractMoney(BigDecimal moneyInserted, String itemId) throws AuditPersistenceException, NoStockException, InsufficientFundsException {
         return transactionService.subtractMoney(moneyInserted, itemId);
     }
 

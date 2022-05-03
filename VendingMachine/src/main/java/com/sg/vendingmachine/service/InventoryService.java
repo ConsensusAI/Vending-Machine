@@ -1,7 +1,7 @@
 package com.sg.vendingmachine.service;
 
 import com.sg.vendingmachine.dao.VendInventoryDao;
-import com.sg.vendingmachine.dao.VendPersistenceException;
+import com.sg.vendingmachine.dao.AuditPersistenceException;
 import com.sg.vendingmachine.dto.ItemDto;
 
 import java.util.List;
@@ -13,7 +13,7 @@ public class InventoryService {
         this.inventoryDao = inventoryDao;
     }
 
-    public List<ItemDto> getAllItems() throws VendPersistenceException {
+    public List<ItemDto> getAllItems() throws AuditPersistenceException {
         return inventoryDao.getAllItems();
     }
 }
