@@ -1,16 +1,14 @@
-package com.sg.vendingmachine.service;
+package com.sg.vendingmachine.audit;
 
-import com.sg.vendingmachine.Change;
-import com.sg.vendingmachine.dao.AuditPersistenceException;
-import com.sg.vendingmachine.dao.VendAuditDao;
-import com.sg.vendingmachine.dto.ItemDto;
+import com.sg.vendingmachine.transaction.Change;
+import com.sg.vendingmachine.inventory.ItemDto;
 
 import java.util.Optional;
 
 public class AuditService {
-    private final VendAuditDao auditDao;
+    private final AuditDao auditDao;
 
-    public AuditService(VendAuditDao auditDao) {
+    public AuditService(AuditDao auditDao) {
         this.auditDao = auditDao;
     }
 

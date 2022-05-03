@@ -1,7 +1,4 @@
-package com.sg.vendingmachine.service;
-
-import com.sg.vendingmachine.Change;
-import com.sg.vendingmachine.Coins;
+package com.sg.vendingmachine.transaction;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;

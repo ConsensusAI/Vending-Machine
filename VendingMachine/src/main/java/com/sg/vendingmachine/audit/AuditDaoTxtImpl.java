@@ -1,11 +1,11 @@
-package com.sg.vendingmachine.dao;
+package com.sg.vendingmachine.audit;
 
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.time.LocalDateTime;
 
-public class VendAuditDaoTxtImpl implements VendAuditDao {
+public class AuditDaoTxtImpl implements AuditDao {
 
     private static final String AUDIT_FILE = "audit.txt";
 

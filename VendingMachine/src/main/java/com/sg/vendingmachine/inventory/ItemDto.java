@@ -1,4 +1,4 @@
-package com.sg.vendingmachine.dto;
+package com.sg.vendingmachine.inventory;
 
 import java.math.BigDecimal;
 import java.util.Objects;

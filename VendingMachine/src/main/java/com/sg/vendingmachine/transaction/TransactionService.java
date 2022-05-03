@@ -1,11 +1,10 @@
-package com.sg.vendingmachine.service;
+package com.sg.vendingmachine.transaction;
 
-import com.sg.vendingmachine.Change;
-import com.sg.vendingmachine.dao.InventoryPersistenceException;
-import com.sg.vendingmachine.dao.VendAuditDao;
-import com.sg.vendingmachine.dao.VendInventoryDao;
-import com.sg.vendingmachine.dao.AuditPersistenceException;
-import com.sg.vendingmachine.dto.ItemDto;
+import com.sg.vendingmachine.audit.AuditService;
+import com.sg.vendingmachine.inventory.InventoryPersistenceException;
+import com.sg.vendingmachine.audit.AuditPersistenceException;
+import com.sg.vendingmachine.inventory.ItemDto;
+import com.sg.vendingmachine.inventory.InventoryService;
 
 import java.math.BigDecimal;
 import java.util.Optional;

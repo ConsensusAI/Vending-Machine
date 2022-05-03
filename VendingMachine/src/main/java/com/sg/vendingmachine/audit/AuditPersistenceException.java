@@ -1,4 +1,4 @@
-package com.sg.vendingmachine.dao;
+package com.sg.vendingmachine.audit;
 
 public class AuditPersistenceException extends Exception {
 

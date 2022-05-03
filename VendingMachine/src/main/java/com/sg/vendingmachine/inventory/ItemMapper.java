@@ -1,6 +1,4 @@
-package com.sg.vendingmachine.dao;
-
-import com.sg.vendingmachine.dto.ItemDto;
+package com.sg.vendingmachine.inventory;
 
 import java.math.BigDecimal;
 

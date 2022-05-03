@@ -1,4 +1,4 @@
-package com.sg.vendingmachine;
+package com.sg.vendingmachine.transaction;
 
 public enum Coins {
     PENNY("1", "Pennies"),

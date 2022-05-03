@@ -1,6 +1,6 @@
 //package com.sg.vendingmachine.service;
 //
-//import com.sg.vendingmachine.dao.VendInventoryDao;
+//import com.sg.vendingmachine.inventory.VendInventoryDao;
 //import org.junit.jupiter.api.Test;
 //
 //class InventoryServiceTest {

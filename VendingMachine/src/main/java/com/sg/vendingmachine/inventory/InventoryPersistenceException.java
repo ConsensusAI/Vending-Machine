@@ -1,4 +1,4 @@
-package com.sg.vendingmachine.dao;
+package com.sg.vendingmachine.inventory;
 
 public class InventoryPersistenceException extends Exception {
 

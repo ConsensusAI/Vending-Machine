@@ -1,7 +1,7 @@
-package com.sg.vendingmachine.ui;
+package com.sg.vendingmachine.system.ui;
 
-import com.sg.vendingmachine.Change;
-import com.sg.vendingmachine.dto.ItemDto;
+import com.sg.vendingmachine.transaction.Change;
+import com.sg.vendingmachine.inventory.ItemDto;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -1,21 +1,18 @@
-package com.sg.vendingmachine.dao;
-
-import com.sg.vendingmachine.dto.ItemDto;
+package com.sg.vendingmachine.inventory;
 
 import java.io.*;
-import java.math.BigDecimal;
 import java.util.*;
 
-public class VendInventoryDaoTxtImpl implements VendInventoryDao {
+public class InventoryDaoTxtImpl implements InventoryDao {
 
     private final Map<String, ItemDto> inventory = new HashMap<>();
     private final String inventoryFile;
 
-    public VendInventoryDaoTxtImpl() {
+    public InventoryDaoTxtImpl() {
         inventoryFile = "inventory.txt";
     }
 
-    public VendInventoryDaoTxtImpl(String inventoryTextFile) {
+    public InventoryDaoTxtImpl(String inventoryTextFile) {
         this.inventoryFile = inventoryTextFile;
     }
 

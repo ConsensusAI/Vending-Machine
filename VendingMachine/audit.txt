@@ -1,2 +1,4 @@
 2022-05-02T21:09:22.994730 : 1 Potato Chips sold for 1.59. 26 remaining.Change returned: Total: $3.41 Quarters: 13 Dimes: 1 Nickels: 1 Pennies: 1
 2022-05-02T21:09:52.166246 : 1 Granola Bar sold for 1.10. 26 remaining.Change returned: Total: $3.90 Quarters: 15 Dimes: 1 Nickels: 1 Pennies: 0
+2022-05-02T21:31:53.328111 : 1 Chocolate Bar sold for 1.25. 24 remaining.Change returned: Total: $8.75 Quarters: 35 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-02T21:32:13.004423 : 1 Water Bottle sold for 0.99. 25 remaining.

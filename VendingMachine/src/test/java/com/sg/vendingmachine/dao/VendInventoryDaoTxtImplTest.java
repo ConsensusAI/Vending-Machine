@@ -1,6 +1,6 @@
 //package com.sg.vendingmachine.dao;
 //
-//import com.sg.vendingmachine.dto.ItemDto;
+//import com.sg.vendingmachine.inventory.ItemDto;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
 //

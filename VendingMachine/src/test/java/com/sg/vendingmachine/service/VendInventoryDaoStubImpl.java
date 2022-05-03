@@ -1,8 +1,8 @@
 //package com.sg.vendingmachine.service;
 //
-//import com.sg.vendingmachine.dao.VendInventoryDao;
-//import com.sg.vendingmachine.dao.AuditPersistenceException;
-//import com.sg.vendingmachine.dto.ItemDto;
+//import com.sg.vendingmachine.inventory.VendInventoryDao;
+//import com.sg.vendingmachine.audit.AuditPersistenceException;
+//import com.sg.vendingmachine.inventory.ItemDto;
 //
 //import java.math.BigDecimal;
 //import java.util.ArrayList;

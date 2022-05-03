@@ -1,6 +1,6 @@
-package com.sg.vendingmachine.dao;
+package com.sg.vendingmachine.audit;
 
-public interface VendAuditDao {
+public interface AuditDao {
 
     void writeAuditEntry(String entry) throws AuditPersistenceException;
 }
