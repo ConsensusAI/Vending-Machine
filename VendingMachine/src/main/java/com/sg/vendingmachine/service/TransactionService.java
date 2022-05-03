@@ -50,22 +50,4 @@ public class TransactionService {
             throw new InsufficientFundsException("ERROR: Insufficient funds.");
         }
     }
-
-    public BigDecimal subtractMoney(BigDecimal moneyInserted, String itemId) throws AuditPersistenceException,
-            NoStockException,
-            InsufficientFundsException {
-        compareMoney(moneyInserted, itemId);
-        checkStock(itemId);
-        moneyInserted = inventoryService.subtractMoney(moneyInserted, itemId);
-        inventoryService.reduceItemStock(itemId);
-
-        auditService.writeAuditEntry("1 " + inventoryService.getItem(itemId).getName() + " sold for "
-                + inventoryService.getItemCost(itemId) + ". " + inventoryService.getItemStock(itemId) +
-                " remaining. Change returned: $" + moneyInserted);
-        return moneyInserted;
-    }
-
-    public String getChange(BigDecimal amount) {
-        return changeService.returnChange(amount);
-    }
 }
