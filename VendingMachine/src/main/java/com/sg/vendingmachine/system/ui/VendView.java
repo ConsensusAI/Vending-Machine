@@ -15,13 +15,13 @@ public class VendView {
     }
 
     public void printWelcomeBanner() {
-        io.print("*******************************************");
-        io.print("Welcome to the Smart Vending MachineTM Plus");
+        io.print(UtfGraphics.STARS.getGraphic());
+        io.print(UtfGraphics.VENDING_NAME.getGraphic());
         io.print("");
     }
 
     public void printInventory(List<ItemDto> items) {
-        io.print("******Current Inventory******");
+        io.print(UtfGraphics.CURRENT_INVENTORY.getGraphic());
         printItems(items);
         io.print("");
     }
