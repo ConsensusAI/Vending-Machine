@@ -1,64 +1,51 @@
 package com.sg.vendingmachine.service;
 
 import com.sg.vendingmachine.Change;
+import com.sg.vendingmachine.Coins;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 public class ChangeService {
+    private static final String QUARTER_VALUE = Coins.QUARTER.getValue();
+    private static final String DIME_VALUE = Coins.DIME.getValue();
+    private static final String NICKEL_VALUE = Coins.NICKEL.getValue();
+    private static final String PENNY_VALUE = Coins.PENNY.getValue();
 
-    public String returnChange(BigDecimal amount) {
-        Change change = new Change(amount);
-        int quarters = change.returnQuarters();
-        int dimes = change.returnDimes();
-        int nickels = change.returnNickels();
-        int pennies = change.returnPennies();
-        String moneyReturned = "Your change: ";
+    public Change computeChange(BigDecimal amountToReturn) {
+        BigDecimal amountInPennies = amountToReturn.multiply(new BigDecimal("100"));
 
-        moneyReturned += returnQuarters(quarters);
-        moneyReturned += returnDimes(dimes);
-        moneyReturned += returnNickels(nickels);
-        moneyReturned += returnPennies(pennies);
+        int numOfQuarters = computeQuarters(amountInPennies);
+        amountInPennies = amountInPennies.subtract(new BigDecimal(numOfQuarters).multiply(new BigDecimal(QUARTER_VALUE)));
 
-        return moneyReturned;
+        int numOfDimes = computeDimes(amountInPennies);
+        amountInPennies = amountInPennies.subtract(new BigDecimal(numOfDimes).multiply(new BigDecimal(DIME_VALUE)));
+
+        int numOfNickels = computeNickels(amountInPennies);
+        amountInPennies = amountInPennies.subtract(new BigDecimal(numOfNickels).multiply(new BigDecimal(NICKEL_VALUE)));
+
+        int numOfPennies = computePennies(amountInPennies);
+
+        return new Change(amountToReturn, numOfQuarters, numOfDimes, numOfNickels, numOfPennies);
     }
 
-    private String returnQuarters(int quarters) {
-        String quartersReturned = "";
-        if (quarters > 1) {
-            quartersReturned += "\n" + quarters + " Quarters";
-        } else if (quarters == 1) {
-            quartersReturned += "\n" + quarters + " Quarter";
-        }
-        return quartersReturned;
+    private int computeQuarters(BigDecimal amountInPennies) {
+        BigDecimal quarters = amountInPennies.divide(new BigDecimal(QUARTER_VALUE), 0, RoundingMode.DOWN);
+        return quarters.intValue();
     }
 
-    private String returnDimes(int dimes) {
-        String dimesReturned = "";
-        if (dimes > 1) {
-            dimesReturned += "\n" + dimes + " Dimes";
-        } else if (dimes == 1) {
-            dimesReturned += "\n" + dimes + " Dime";
-        }
-        return dimesReturned;
+    private int computeDimes(BigDecimal amountInPennies) {
+        BigDecimal dimes = amountInPennies.divide(new BigDecimal(DIME_VALUE), 0, RoundingMode.DOWN);
+        return dimes.intValue();
     }
 
-    private String returnNickels(int nickels) {
-        String nickelsReturned = "";
-        if (nickels > 1) {
-            nickelsReturned += "\n" + nickels + " Nickels";
-        } else if (nickels == 1) {
-            nickelsReturned += "\n" + nickels + " Nickel";
-        }
-        return nickelsReturned;
+    private int computeNickels(BigDecimal amountInPennies) {
+        BigDecimal nickels = amountInPennies.divide(new BigDecimal(NICKEL_VALUE), 0, RoundingMode.DOWN);
+        return nickels.intValue();
     }
 
-    private String returnPennies(int pennies) {
-        String penniesReturned = "";
-        if (pennies == 1) {
-            penniesReturned += "\n" + pennies + " Penny";
-        } else {
-            penniesReturned += "\n" + pennies + " Pennies";
-        }
-        return penniesReturned;
+    private int computePennies(BigDecimal amountInPennies) {
+        BigDecimal pennies = amountInPennies.divide(new BigDecimal(PENNY_VALUE), 0, RoundingMode.DOWN);
+        return pennies.intValue();
     }
 }

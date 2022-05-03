@@ -1,6 +1,7 @@
 package com.sg.vendingmachine.service;
 
 import com.sg.vendingmachine.Change;
+import com.sg.vendingmachine.dao.AuditPersistenceException;
 import com.sg.vendingmachine.dao.VendAuditDao;
 import com.sg.vendingmachine.dto.ItemDto;
 
