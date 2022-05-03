@@ -8,18 +8,18 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
-public class VendInventoryDaoStubImpl implements InventoryDao {
+public class InventoryDaoStubImpl implements InventoryDao {
 
     public ItemDto onlyItem;
 
-    public VendInventoryDaoStubImpl() {
+    public InventoryDaoStubImpl() {
         onlyItem = new ItemDto("1");
         onlyItem.setName("Chips");
         onlyItem.setCost(new BigDecimal("9.99"));
         onlyItem.setStock(10);
     }
 
-    public VendInventoryDaoStubImpl(ItemDto testItem) {
+    public InventoryDaoStubImpl(ItemDto testItem) {
         this.onlyItem = testItem;
     }
 
