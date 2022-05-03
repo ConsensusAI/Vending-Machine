@@ -12,12 +12,12 @@ import java.util.Optional;
 public class TransactionService {
     private final InventoryService inventoryService;
     private final AuditService auditService;
-    private final ChangeService changeService;
+    private final ChangeCalculator changeCalculator;
 
-    public TransactionService(InventoryService inventoryService, AuditService auditService, ChangeService changeService) {
+    public TransactionService(InventoryService inventoryService, AuditService auditService, ChangeCalculator changeCalculator) {
         this.inventoryService = inventoryService;
         this.auditService = auditService;
-        this.changeService = changeService;
+        this.changeCalculator = changeCalculator;
     }
 
     public void checkStock(ItemDto item) throws NoStockException {
@@ -37,7 +37,7 @@ public class TransactionService {
         Optional<Change> changeMaybe = Optional.empty();
         BigDecimal amountToReturn = moneyInserted.subtract(item.getCost());
         if (amountToReturn.compareTo(BigDecimal.ZERO) > 0) { // Checks if amount to return is greater than 0.00
-            changeMaybe = Optional.of(changeService.computeChange(amountToReturn));
+            changeMaybe = Optional.of(changeCalculator.computeChange(amountToReturn));
         }
 
         auditService.auditTransaction(item, changeMaybe);

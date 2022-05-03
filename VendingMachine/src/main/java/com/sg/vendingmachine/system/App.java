@@ -6,7 +6,7 @@ import com.sg.vendingmachine.audit.AuditDaoTxtImpl;
 import com.sg.vendingmachine.inventory.InventoryDao;
 import com.sg.vendingmachine.inventory.InventoryDaoTxtImpl;
 import com.sg.vendingmachine.audit.AuditService;
-import com.sg.vendingmachine.transaction.ChangeService;
+import com.sg.vendingmachine.transaction.ChangeCalculator;
 import com.sg.vendingmachine.transaction.TransactionService;
 import com.sg.vendingmachine.inventory.InventoryService;
 import com.sg.vendingmachine.system.ui.UserIO;
@@ -22,7 +22,7 @@ public class App {
         AuditDao auditDao = new AuditDaoTxtImpl();
         InventoryService inventoryService = new InventoryService(inventoryDao);
         AuditService auditService = new AuditService(auditDao);
-        TransactionService transactionService = new TransactionService(inventoryService, auditService, new ChangeService());
+        TransactionService transactionService = new TransactionService(inventoryService, auditService, new ChangeCalculator());
         VendController controller = new VendController(inventoryService, view, transactionService);
         controller.run();
     }
