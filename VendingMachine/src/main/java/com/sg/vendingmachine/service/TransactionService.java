@@ -15,10 +15,10 @@ public class TransactionService {
     private final AuditService auditService;
     private final ChangeService changeService;
 
-    public TransactionService(InventoryService inventoryService, AuditService auditService) {
+    public TransactionService(InventoryService inventoryService, AuditService auditService, ChangeService changeService) {
         this.inventoryService = inventoryService;
         this.auditService = auditService;
-        this.changeService = new ChangeService();
+        this.changeService = changeService;
     }
 
     public void checkStock(ItemDto item) throws NoStockException {
