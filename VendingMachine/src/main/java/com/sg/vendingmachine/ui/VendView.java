@@ -1,10 +1,10 @@
 package com.sg.vendingmachine.ui;
 
+import com.sg.vendingmachine.Change;
 import com.sg.vendingmachine.dto.ItemDto;
 
 import java.math.BigDecimal;
 import java.util.List;
-import java.util.Map;
 
 public class VendView {
 
@@ -20,13 +20,25 @@ public class VendView {
         io.print("");
     }
 
-    public void printItems(List<ItemDto> items) {
+    public void printInventory(List<ItemDto> items) {
         io.print("******Current Inventory******");
+        printItems(items);
+        io.print("");
+    }
+
+    private void printItems(List<ItemDto> items) {
         items.stream()
                 .filter(x -> x.getStock() > 0)
                 .forEach(x -> io.print(x.getName() + ", $" + x.getCost() +
                         ", " + x.getStock() + " remaining."));
-        io.print("");
+    }
+
+    private void printThankYou() {
+        io.print("Thank you for your purchase!");
+    }
+
+    private void printLineBreak() {
+        io.print("================================");
     }
 
     public int printMenuAndGetSelection() {
@@ -40,7 +52,8 @@ public class VendView {
     }
 
     public BigDecimal promptMoneyInserted() {
-        return new BigDecimal(io.readString("How much money would you like to insert? (Please enter a value)"));
+        return new BigDecimal(io.readString("How much money would you like to insert? " +
+                "(Please enter the number of dollars)"));
     }
 
     public int printItemsAndGetSelection(List<ItemDto> items) {
@@ -60,8 +73,21 @@ public class VendView {
         io.print("");
     }
 
-    public void printChange(String moneyReturned) {
-        io.print(moneyReturned);
+    public void printChange(Change change) {
+        io.print("");
+        printLineBreak();
+        printThankYou();
+        io.print("Here's your change...");
+        io.print(change.toString());
+        io.print("");
+    }
+
+    public void printNoChange() {
+        io.print("");
+        printLineBreak();
+        printThankYou();
+        io.print("No change to return...");
+        io.print("");
     }
 
     public void printUnknown() {

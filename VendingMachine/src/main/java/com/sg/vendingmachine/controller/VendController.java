@@ -28,7 +28,7 @@ public class VendController {
         try {
             while (keepGoing) {
                 view.printWelcomeBanner();
-                view.printItems(inventoryService.getAllItems());
+                view.printInventory(inventoryService.getAllItems());
                 menuSelection = view.printMenuAndGetSelection();
 
                 switch (menuSelection) {
@@ -62,7 +62,7 @@ public class VendController {
 
         while (true) {
             allItems = inventoryService.getAllItems();
-            view.printItems(allItems);
+            view.printInventory(allItems);
             view.printMoney(moneyInserted);
             itemSelection = view.printItemsAndGetSelection(allItems);
             if (itemSelection == allItems.size() + 1) {
