@@ -1,10 +1,11 @@
 package com.sg.vendingmachine.system.controller;
 
+import com.sg.vendingmachine.inventory.InventoryService;
 import com.sg.vendingmachine.transaction.Change;
 import com.sg.vendingmachine.audit.AuditPersistenceException;
 import com.sg.vendingmachine.inventory.InventoryPersistenceException;
 import com.sg.vendingmachine.inventory.ItemDto;
-import com.sg.vendingmachine.inventory.InventoryService;
+import com.sg.vendingmachine.inventory.InventoryServiceImpl;
 import com.sg.vendingmachine.system.ui.VendView;
 import com.sg.vendingmachine.transaction.InsufficientFundsException;
 import com.sg.vendingmachine.transaction.NoStockException;
@@ -18,12 +19,12 @@ import java.util.Optional;
 public class VendController {
 
     private final VendView view;
-    private final InventoryService inventoryService;
+    private final InventoryService inventoryServiceImpl;
     private final TransactionService transactionService;
 
-    public VendController(InventoryService inventoryService, VendView view, TransactionService transactionService) {
+    public VendController(InventoryService inventoryServiceImpl, VendView view, TransactionService transactionService) {
         this.view = view;
-        this.inventoryService = inventoryService;
+        this.inventoryServiceImpl = inventoryServiceImpl;
         this.transactionService = transactionService;
     }
 
@@ -34,7 +35,7 @@ public class VendController {
         try {
             while (keepGoing) {
                 view.printWelcomeBanner();
-                view.printInventory(inventoryService.getAllItems());
+                view.printInventory(inventoryServiceImpl.getAllItems());
                 menuSelection = view.printMenuAndGetSelection();
 
                 switch (menuSelection) {
@@ -65,7 +66,7 @@ public class VendController {
             AuditPersistenceException {
         BigDecimal moneyInserted = view.promptMoneyInserted().setScale(2, RoundingMode.HALF_UP);
 
-        List<ItemDto> allItems = inventoryService.getAllItems();
+        List<ItemDto> allItems = inventoryServiceImpl.getAllItems();
         view.printMoney(moneyInserted);
         int itemSelection = view.printItemsAndGetSelection(allItems);
         if (itemSelection == allItems.size() + 1) {

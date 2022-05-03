@@ -1,4 +1,4 @@
-1::Chocolate Bar::1.25::23
+1::Chocolate Bar::1.25::22
 2::Sports Drink::3.25::23
 3::Water Bottle::0.99::24
 4::Granola Bar::1.10::25

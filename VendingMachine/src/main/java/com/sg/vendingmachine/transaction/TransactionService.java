@@ -1,21 +1,21 @@
 package com.sg.vendingmachine.transaction;
 
-import com.sg.vendingmachine.audit.AuditService;
+import com.sg.vendingmachine.audit.AuditServiceImpl;
 import com.sg.vendingmachine.inventory.InventoryPersistenceException;
 import com.sg.vendingmachine.audit.AuditPersistenceException;
-import com.sg.vendingmachine.inventory.ItemDto;
 import com.sg.vendingmachine.inventory.InventoryService;
+import com.sg.vendingmachine.inventory.ItemDto;
 
 import java.math.BigDecimal;
 import java.util.Optional;
 
 public class TransactionService {
-    private final InventoryService inventoryService;
-    private final AuditService auditService;
+    private final InventoryService inventoryServiceImpl;
+    private final AuditServiceImpl auditService;
     private final ChangeCalculator changeCalculator;
 
-    public TransactionService(InventoryService inventoryService, AuditService auditService, ChangeCalculator changeCalculator) {
-        this.inventoryService = inventoryService;
+    public TransactionService(InventoryService inventoryServiceImpl, AuditServiceImpl auditService, ChangeCalculator changeCalculator) {
+        this.inventoryServiceImpl = inventoryServiceImpl;
         this.auditService = auditService;
         this.changeCalculator = changeCalculator;
     }
@@ -28,11 +28,11 @@ public class TransactionService {
 
     public Optional<Change> computeTransaction(BigDecimal moneyInserted, String itemId)
     throws InventoryPersistenceException, AuditPersistenceException, NoStockException, InsufficientFundsException {
-        ItemDto item = inventoryService.getItem(itemId);
+        ItemDto item = inventoryServiceImpl.getItem(itemId);
         checkStock(item);
         compareMoney(moneyInserted, item);
 
-        inventoryService.reduceItemStock(itemId);
+        inventoryServiceImpl.reduceItemStock(itemId);
 
         Optional<Change> changeMaybe = Optional.empty();
         BigDecimal amountToReturn = moneyInserted.subtract(item.getCost());
