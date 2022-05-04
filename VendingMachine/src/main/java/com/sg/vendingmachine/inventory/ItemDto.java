@@ -56,6 +56,6 @@ public class ItemDto {
 
     @Override
     public String toString() {
-        return "Item{ID=" + this.id + ", name=" + this.name + ", cost=" + this.cost + "stock=" + this.stock;
+        return "Item{ID=" + this.id + ", name=" + this.name + ", cost=" + this.cost + ", stock=" + this.stock;
     }
 }

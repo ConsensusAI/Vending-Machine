@@ -22,7 +22,7 @@ public class TransactionService {
 
     public void checkStock(ItemDto item) throws NoStockException {
         if (item.getStock() <= 0) {
-            throw new NoStockException("ERROR: Item is out of stock.");
+            throw new NoStockException("ERROR: Item is out of stock: " + item.getName() + ".");
         }
     }
 
