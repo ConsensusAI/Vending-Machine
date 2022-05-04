@@ -29,47 +29,48 @@ public class VendView {
     private void printItems(List<ItemDto> items) {
         items.stream()
                 .filter(x -> x.getStock() > 0)
-                .forEach(x -> io.print(x.getName() + ", $" + x.getCost() +
-                        ", " + x.getStock() + " remaining."));
+                .forEach(x -> io.print(x.getName() + "， ＄" + x.getCost() +
+                        "， " + x.getStock() + " ｒｅｍａｉｎｉｎｇ．"));
     }
 
     private void printThankYou() {
-        io.print("Thank you for your purchase!");
+        io.print(UtfGraphics.THANK_YOU.getGraphic());
+        printEnterToContinue();
     }
 
     private void printLineBreak() {
-        io.print("================================");
+        io.print(UtfGraphics.EQUALS_BANNER.getGraphic());
     }
 
     public int printMenuAndGetSelection() {
-        io.print("Main Menu");
-        io.print("What would you like to do?");
+        io.print(UtfGraphics.MAIN_MENU.getGraphic());
+        io.print("\uFEFFＷｈａｔ　ｗｏｕｌｄ　ｙｏｕ　ｌｉｋｅ　ｔｏ　ｄｏ？");
         io.print("");
-        io.print("1. Purchase an item.");
-        io.print("2. Exit");
+        io.print("『１．　Ｐｕｒｃｈａｓｅ　ａｎ　ｉｔｅｍ．』");
+        io.print("『２．　Ｅｘｉｔ』");
 
-        return io.readInt("Please select from the above choices.", 1, 2);
+        return io.readInt(UtfGraphics.PLEASE_SELECT.getGraphic(), 1, 2);
     }
 
     public BigDecimal promptMoneyInserted() {
-        return new BigDecimal(io.readString("How much money would you like to insert? " +
-                "(Please enter the number of dollars)"));
+        return new BigDecimal(io.readString("Ｈｏｗ　ｍｕｃｈ　ｍｏｎｅｙ　ｗｏｕｌｄ　ｙｏｕ　ｌｉｋｅ　ｔｏ　ｉｎｓｅｒｔ？" +
+                "\n（Ｐｌｅａｓｅ　ｅｎｔｅｒ　ｔｈｅ　ｎｕｍｂｅｒ　ｏｆ　ｄｏｌｌａｒｓ）："));
     }
 
     public int printItemsAndGetSelection(List<ItemDto> items) {
         io.print("");
-        io.print("================================");
-        io.print("Which item would you like to buy?");
+        printLineBreak();
+        io.print("Ｗｈｉｃｈ　ｉｔｅｍ　ｗｏｕｌｄ　ｙｏｕ　ｌｉｋｅ　ｔｏ　ｂｕｙ？");
         int max = items.size() + 1;
         items.stream()
                 .filter(x -> x.getStock() > 0)
-                .forEach(x -> io.print(x.getId() + ". " + x.getName()));
-        io.print(max + ". Exit");
-        return io.readInt("Please select from the above choices.", 1, max);
+                .forEach(x -> io.print(x.getId() + "． " + x.getName()));
+        io.print(max + "． 【\uFEFFＥｘｉｔ】");
+        return io.readInt(UtfGraphics.PLEASE_SELECT.getGraphic(), 1, max);
     }
 
     public void printMoney(BigDecimal money) {
-        io.print("YOU HAVE: $" + money + ".");
+        io.print("ＹＯＵ　ＨＡＶＥ：　＄" + money + "．");
         io.print("");
     }
 
@@ -77,30 +78,34 @@ public class VendView {
         io.print("");
         printLineBreak();
         printThankYou();
-        io.print("Here's your change...");
+        io.print(UtfGraphics.HERE_IS_YOUR_CHANGE.getGraphic());
         io.print(change.toString());
-        io.print("");
+        printEnterToContinue();
     }
 
     public void printNoChange() {
         io.print("");
         printLineBreak();
         printThankYou();
-        io.print("No change to return...");
-        io.print("");
+        io.print(UtfGraphics.NO_CHANGE.getGraphic());
+        printEnterToContinue();
     }
 
     public void printUnknown() {
-        io.print("Unknown Command!!");
+        io.print(UtfGraphics.UNKNOWN_COMMAND.getGraphic());
     }
 
     public void printErrorMessage(String errorMsg) {
-        io.print("=== ERROR ===");
+        io.print("【\uFEFF＝＝＝　ＥＲＲＯＲ　＝＝＝】");
         io.print(errorMsg);
     }
 
     public void printExitMessage() {
         io.print("Goodbye!!");
+    }
+
+    public void printEnterToContinue() {
+        io.readString(UtfGraphics.PRESS_ENTER.getGraphic());
     }
 
 }

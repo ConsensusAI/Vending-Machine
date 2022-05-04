@@ -4,3 +4,22 @@
 2022-05-02T21:32:13.004423 : 1 Water Bottle sold for 0.99. 25 remaining.
 2022-05-02T21:34:09.953411 : 1 Sports Drink sold for 3.25. 24 remaining.Change returned: Total: $4.75 Quarters: 19 Dimes: 0 Nickels: 0 Pennies: 0
 2022-05-02T22:29:36.503417 : 1 Chocolate Bar sold for 1.25. 23 remaining.Change returned: Total: $3.75 Quarters: 15 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-04T14:23:52.001358 : 1 Chocolate Bar sold for 1.25. 22 remaining.Change returned: Total: $1.75 Quarters: 7 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-04T14:55:02.642034 : 1 Chocolate Bar sold for 1.25. 21 remaining.Change returned: Total: $3.75 Quarters: 15 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-04T14:57:01.328302 : 1 Chocolate Bar sold for 1.25. 20 remaining.Change returned: Total: $3.75 Quarters: 15 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-04T14:57:48.257755 : 1 Chocolate Bar sold for 1.25. 19 remaining.Change returned: Total: $3.75 Quarters: 15 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-04T14:58:56.889728 : 1 Chocolate Bar sold for 1.25. 18 remaining.Change returned: Total: $1.75 Quarters: 7 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-04T15:00:36.669537 : 1 Chocolate Bar sold for 1.25. 17 remaining.Change returned: Total: $1.75 Quarters: 7 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-04T15:01:29.583615 : 1 Chocolate Bar sold for 1.25. 16 remaining.Change returned: Total: $1.75 Quarters: 7 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-04T15:04:56.190078 : 1 Chocolate Bar sold for 1.25. 15 remaining.Change returned: Total: $1.75 Quarters: 7 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-04T15:05:26.333416 : 1 Chocolate Bar sold for 1.25. 14 remaining.Change returned: Total: $1.75 Quarters: 7 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-04T15:05:42.757932 : 1 Chocolate Bar sold for 1.25. 13 remaining.Change returned: Total: $1.75 Quarters: 7 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-04T15:06:06.291513 : 1 Chocolate Bar sold for 1.25. 12 remaining.Change returned: Total: $1.75 Quarters: 7 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-04T15:06:20.822474 : 1 Chocolate Bar sold for 1.25. 11 remaining.Change returned: Total: $1.75 Quarters: 7 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-04T15:07:46.981157 : 1 Chocolate Bar sold for 1.25. 10 remaining.Change returned: Total: $1.75 Quarters: 7 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-04T15:08:51.804469 : 1 Chocolate Bar sold for 1.25. 9 remaining.Change returned: Total: $1.75 Quarters: 7 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-04T15:09:46.181781 : 1 Chocolate Bar sold for 1.25. 8 remaining.Change returned: Total: $1.75 Quarters: 7 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-04T15:10:11.171317 : 1 Water Bottle sold for 0.99. 24 remaining.Change returned: Total: $2.01 Quarters: 8 Dimes: 0 Nickels: 0 Pennies: 1
+2022-05-04T15:37:00.655634 : 1 【﻿Ｃｈｏｃｏｌａｔｅ　Ｂａｒ】 sold for 1.25. 100 remaining.Change returned: Total: $1.75 Quarters: 7 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-04T15:38:11.310245 : 1 【﻿Ｃｈｏｃｏｌａｔｅ　Ｂａｒ】 sold for 1.25. 99 remaining.Change returned: Total: $1.75 Quarters: 7 Dimes: 0 Nickels: 0 Pennies: 0
+2022-05-04T15:39:41.724378 : 1 【﻿Ｗａｔｅｒ　Ｂｏｔｔｌｅ】 sold for 0.99. 23 remaining.
