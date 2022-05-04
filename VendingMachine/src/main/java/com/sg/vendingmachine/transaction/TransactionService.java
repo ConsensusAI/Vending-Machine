@@ -46,7 +46,7 @@ public class TransactionService {
 
     public void compareMoney(BigDecimal moneyInserted, ItemDto item) throws AuditPersistenceException, InsufficientFundsException {
         if (moneyInserted.compareTo(item.getCost()) < 0) {
-            throw new InsufficientFundsException("ERROR: Insufficient funds.");
+            throw new InsufficientFundsException("ERROR: Insufficient funds. You have: $" + moneyInserted);
         }
     }
 }
