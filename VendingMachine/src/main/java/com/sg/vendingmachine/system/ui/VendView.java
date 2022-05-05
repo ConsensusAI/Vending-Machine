@@ -101,7 +101,7 @@ public class VendView {
     }
 
     public void printExitMessage() {
-        io.print("Goodbye!!");
+        io.print("【\uFEFFＧｏｏｄｂｙｅ！！】");
     }
 
     public void printEnterToContinue() {
